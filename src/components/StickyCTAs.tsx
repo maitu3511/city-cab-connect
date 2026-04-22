@@ -1,7 +1,7 @@
 import { MessageCircle, Phone } from "lucide-react";
 
-const WHATSAPP_NUMBER = "919999999999";
-const PHONE_NUMBER = "+919999999999";
+const WHATSAPP_NUMBER = "918460107287";
+const PHONE_NUMBER = "+918460107287";
 
 const StickyCTAs = () => {
   return (
