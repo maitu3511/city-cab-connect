@@ -9,9 +9,9 @@ const Footer = () => {
       <div className="container">
         <div className="grid sm:grid-cols-3 gap-8">
           <div>
-            <h3 className="font-display text-xl font-bold text-primary mb-3">[Client Name] Cab Service</h3>
+            <h3 className="font-display text-xl font-bold text-primary mb-3">RideSure Cab Service</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Your trusted cab service in [City]. Available 24/7 for local rides, airport transfers and outstation trips.
+              Your trusted cab service in Ahmedabad. Available 24/7 for local rides, airport transfers and outstation trips.
             </p>
             <div className="flex gap-3 mt-4">
               <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-9 h-9 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 border border-border transition-colors">
@@ -56,14 +56,14 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-primary" />
-                <span>[City], India</span>
+                <span>Ahmedabad, India</span>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="mt-10 pt-6 border-t border-border text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} [Client Name] Cab Service. All rights reserved.
+          © {new Date().getFullYear()} RideSure Cab Service. All rights reserved.
         </div>
       </div>
     </footer>

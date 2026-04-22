@@ -18,7 +18,7 @@ const Navbar = () => {
     <nav className="sticky top-0 z-40 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="container flex items-center justify-between h-16">
         <a href="#" className="font-display text-xl font-bold text-primary">
-          [Client Name]
+          RideSure
         </a>
 
         {/* Desktop */}

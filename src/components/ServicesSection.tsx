@@ -5,7 +5,7 @@ const services = [
   {
     icon: Car,
     title: "Local Ride",
-    description: "Comfortable city rides for daily commute, shopping, or any local travel within [City].",
+    description: "Comfortable city rides for daily commute, shopping, or any local travel within Ahmedabad.",
   },
   {
     icon: Plane,
