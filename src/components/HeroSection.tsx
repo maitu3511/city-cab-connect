@@ -30,7 +30,7 @@ const HeroSection = () => {
             <span className="text-gradient">in Minutes</span>
           </h1>
           <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-lg">
-            Fast, Reliable & Affordable Cab Service in [City]. Available 24/7 for local rides, airport transfers & outstation trips.
+            Fast, Reliable & Affordable Cab Service in Ahmedabad. Available 24/7 for local rides, airport transfers & outstation trips.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
