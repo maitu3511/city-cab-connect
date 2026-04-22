@@ -1,4 +1,4 @@
-import { Phone, MessageCircle, Mail, MapPin } from "lucide-react";
+import { Phone, MessageCircle, Mail, MapPin, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 
 const WHATSAPP_NUMBER = "919999999999";
 const PHONE_NUMBER = "+919999999999";
