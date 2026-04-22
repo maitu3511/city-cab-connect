@@ -3,8 +3,8 @@ import { Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-cab.jpg";
 
-const WHATSAPP_NUMBER = "919999999999";
-const PHONE_NUMBER = "+919999999999";
+const WHATSAPP_NUMBER = "918460107287";
+const PHONE_NUMBER = "+918460107287";
 
 const HeroSection = () => {
   return (

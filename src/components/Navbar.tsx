@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const PHONE_NUMBER = "+919999999999";
+const PHONE_NUMBER = "+918460107287";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
