@@ -1,29 +1,29 @@
-import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
-import BookingForm from "@/components/BookingForm";
-import ChooseCarSection from "@/components/ChooseCarSection";
-import PackagesSection from "@/components/PackagesSection";
+import StarField from "@/components/StarField";
+import CosmicNavbar from "@/components/CosmicNavbar";
+import CosmicHero from "@/components/CosmicHero";
+import AboutSection from "@/components/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import ReviewsSection from "@/components/ReviewsSection";
-import MapSection from "@/components/MapSection";
-import Footer from "@/components/Footer";
-import StickyCTAs from "@/components/StickyCTAs";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import BookingSection from "@/components/BookingSection";
+import CosmicFooter from "@/components/CosmicFooter";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <HeroSection />
-      <BookingForm />
-      <ChooseCarSection />
-      <PackagesSection />
-      <ServicesSection />
-      <WhyChooseUs />
-      <ReviewsSection />
-      <MapSection />
-      <Footer />
-      <StickyCTAs />
+    <div className="relative min-h-screen overflow-x-hidden">
+      <StarField />
+      <div className="relative z-10">
+        <CosmicNavbar />
+        <main>
+          <CosmicHero />
+          <AboutSection />
+          <ServicesSection />
+          <TestimonialsSection />
+          <BookingSection />
+        </main>
+        <CosmicFooter />
+        <FloatingWhatsApp />
+      </div>
     </div>
   );
 };
