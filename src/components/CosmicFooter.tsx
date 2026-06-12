@@ -1,4 +1,4 @@
-import { Sparkles, Phone, Mail, MapPin, Instagram, Facebook, Youtube, MessageCircle } from "lucide-react";
+import { Sparkles, Phone, Mail, MapPin, Instagram, Facebook, Youtube, MessageCircle } from "lucide-react/icons";
 
 const WHATSAPP_NUMBER = "918460107287";
 const PHONE_NUMBER = "+918460107287";
