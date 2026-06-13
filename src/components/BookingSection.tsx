@@ -26,10 +26,18 @@ const BookingSection = () => {
 
   const update = (k: keyof typeof form) => (v: string) => setForm({ ...form, [k]: v });
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const { error } = await supabase.from("appointments").insert({
+      name: form.name, phone: form.phone, email: form.email || null,
+      service: form.service, appointment_date: form.date, appointment_time: form.time,
+      message: form.message || null,
+    });
+    if (error) { toast.error("Could not save. Please try again."); return; }
     const msg = `🙏 *New Appointment Request*\n\n👤 *Name:* ${form.name}\n📞 *Phone:* ${form.phone}${form.email ? `\n📧 *Email:* ${form.email}` : ""}\n✨ *Service:* ${form.service}\n📅 *Date:* ${form.date}\n⏰ *Time:* ${form.time}${form.message ? `\n📝 *Message:* ${form.message}` : ""}`;
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+    openWhatsApp(msg);
+    toast.success("Appointment request sent!");
+    setForm({ name: "", phone: "", email: "", date: "", time: "", service: "", message: "" });
   };
 
   return (
