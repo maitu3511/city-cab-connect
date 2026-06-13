@@ -1,4 +1,4 @@
-import { Sparkles, Phone, Mail, MapPin, MessageCircle, Instagram, Facebook, Youtube } from "lucide-react";
+import { Sparkles, Phone, Mail, MapPin, MessageCircle, Instagram, Facebook, Youtube } from "lucide-react/icons";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { WHATSAPP_NUMBER, PHONE_NUMBER, EMAIL } from "@/lib/whatsapp";
