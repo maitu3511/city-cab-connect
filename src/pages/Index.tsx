@@ -2,21 +2,25 @@ import StarField from "@/components/StarField";
 import CosmicNavbar from "@/components/CosmicNavbar";
 import CosmicHero from "@/components/CosmicHero";
 import AboutSection from "@/components/AboutSection";
+import StatsStrip from "@/components/StatsStrip";
 import ServicesSection from "@/components/ServicesSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import BookingSection from "@/components/BookingSection";
 import CosmicFooter from "@/components/CosmicFooter";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import SEO from "@/components/SEO";
 
 const Index = () => {
   return (
     <div className="relative min-h-screen overflow-x-hidden">
+      <SEO title="Astro With Hrishi — Vedic Astrology & Spiritual Guidance" description="15+ years of authentic Vedic astrology. Personalized Kundli readings, marriage, career, and spiritual guidance from Astrologer Hrishi." path="/" />
       <StarField />
       <div className="relative z-10">
         <CosmicNavbar />
         <main>
           <CosmicHero />
           <AboutSection />
+          <StatsStrip />
           <ServicesSection />
           <TestimonialsSection />
           <BookingSection />
