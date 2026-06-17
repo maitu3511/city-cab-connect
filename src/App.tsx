@@ -10,12 +10,6 @@ import NotFound from "./pages/NotFound.tsx";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import Booking from "./pages/Booking";
-import Shop from "./pages/Shop";
-import ProductDetail from "./pages/ProductDetail";
-import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
-import OrderSuccess from "./pages/OrderSuccess";
-import MyOrders from "./pages/MyOrders";
 import Gallery from "./pages/Gallery";
 import Videos from "./pages/Videos";
 import Testimonials from "./pages/Testimonials";
@@ -40,12 +34,6 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/booking" element={<Booking />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/shop/:id" element={<ProductDetail />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/order-success/:id" element={<OrderSuccess />} />
-          <Route path="/orders" element={<MyOrders />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/videos" element={<Videos />} />
           <Route path="/testimonials" element={<Testimonials />} />

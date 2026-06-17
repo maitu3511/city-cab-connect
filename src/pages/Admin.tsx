@@ -19,15 +19,13 @@ const Admin = () => {
   return (
     <PageLayout title="Admin Dashboard">
       <div className="container max-w-6xl">
-        <Tabs defaultValue="orders" className="w-full">
+        <Tabs defaultValue="appointments" className="w-full">
           <TabsList className="glass-gold flex-wrap h-auto justify-start">
-            {["orders", "appointments", "products", "blog", "gallery", "videos", "testimonials", "messages", "customers"].map((t) => (
+            {["appointments", "blog", "gallery", "videos", "testimonials", "messages", "customers"].map((t) => (
               <TabsTrigger key={t} value={t} className="capitalize data-[state=active]:bg-gradient-gold data-[state=active]:text-primary-foreground">{t}</TabsTrigger>
             ))}
           </TabsList>
-          <TabsContent value="orders"><OrdersTab /></TabsContent>
           <TabsContent value="appointments"><AppointmentsTab /></TabsContent>
-          <TabsContent value="products"><ProductsTab /></TabsContent>
           <TabsContent value="blog"><BlogTab /></TabsContent>
           <TabsContent value="gallery"><GalleryTab /></TabsContent>
           <TabsContent value="videos"><VideosTab /></TabsContent>
@@ -49,30 +47,6 @@ const useList = (table: string, order = "created_at") => {
 
 const Card = ({ children }: { children: any }) => <div className="glass-gold rounded-2xl p-5 mt-6">{children}</div>;
 
-const OrdersTab = () => {
-  const [orders, reload] = useList("orders");
-  const update = async (id: string, status: string) => {
-    await supabase.from("orders").update({ status }).eq("id", id);
-    toast.success("Updated"); reload();
-  };
-  return (
-    <div className="space-y-3 mt-6">
-      {orders.map((o) => (
-        <div key={o.id} className="glass-gold rounded-2xl p-4">
-          <div className="flex justify-between mb-2">
-            <div><div className="font-display text-gold">{o.customer_name}</div><div className="text-xs text-cosmic-silver/60">{o.customer_phone} • {new Date(o.created_at).toLocaleString()}</div></div>
-            <select value={o.status} onChange={(e) => update(o.id, e.target.value)} className="bg-background/60 border border-gold/30 rounded px-2 text-xs">
-              {["pending", "paid", "shipped", "delivered", "cancelled"].map((s) => <option key={s}>{s}</option>)}
-            </select>
-          </div>
-          <div className="text-xs text-cosmic-silver/75">{(o.items as any[]).map((i) => `${i.name} ×${i.qty}`).join(", ")}</div>
-          <div className="text-xs text-cosmic-silver/60 mt-1">{o.address}</div>
-          <div className="text-right text-gold font-bold mt-1">₹{Number(o.total).toLocaleString("en-IN")}</div>
-        </div>
-      ))}
-    </div>
-  );
-};
 
 const AppointmentsTab = () => {
   const [list, reload] = useList("appointments");

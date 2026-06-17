@@ -52,7 +52,6 @@ const CosmicFooter = () => {
                 { l: t("nav.home"), to: "/" },
                 { l: t("nav.about"), to: "/about" },
                 { l: t("nav.services"), to: "/services" },
-                { l: t("nav.shop"), to: "/shop" },
                 { l: t("nav.gallery"), to: "/gallery" },
                 { l: t("nav.videos"), to: "/videos" },
                 { l: t("nav.blog"), to: "/blog" },
