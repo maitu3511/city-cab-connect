@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Sparkles, Phone, ShoppingBag, User as UserIcon } from "lucide-react";
+import { Menu, X, Sparkles, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
-import { useCart } from "@/lib/cart";
 import { useAuth } from "@/hooks/useAuth";
 import { PHONE_NUMBER } from "@/lib/whatsapp";
 
@@ -13,7 +12,6 @@ const CosmicNavbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const loc = useLocation();
-  const count = useCart((s) => s.count());
   const { user, isAdmin, signOut } = useAuth();
 
   useEffect(() => {
@@ -27,7 +25,6 @@ const CosmicNavbar = () => {
     { label: t("nav.home"), to: "/" },
     { label: t("nav.about"), to: "/about" },
     { label: t("nav.services"), to: "/services" },
-    { label: t("nav.shop"), to: "/shop" },
     { label: t("nav.gallery"), to: "/gallery" },
     { label: t("nav.videos"), to: "/videos" },
     { label: t("nav.blog"), to: "/blog" },
@@ -58,15 +55,8 @@ const CosmicNavbar = () => {
 
         <div className="flex items-center gap-2 sm:gap-3">
           <LanguageSwitcher />
-          <Link to="/cart" className="relative p-2 text-foreground/80 hover:text-gold transition-colors">
-            <ShoppingBag className="h-5 w-5" />
-            {count > 0 && (
-              <span className="absolute -top-1 -right-1 bg-gradient-gold text-primary-foreground text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center">{count}</span>
-            )}
-          </Link>
           {user ? (
             <div className="hidden sm:flex items-center gap-2">
-              <Link to="/orders" className="text-xs text-cosmic-silver/80 hover:text-gold"><UserIcon className="h-5 w-5" /></Link>
               {isAdmin && <Link to="/admin" className="text-xs text-gold hover:underline">{t("nav.admin")}</Link>}
               <button onClick={() => signOut()} className="text-xs text-cosmic-silver/70 hover:text-gold">{t("nav.signOut")}</button>
             </div>
@@ -92,7 +82,6 @@ const CosmicNavbar = () => {
           <Link to="/faq" className="block text-foreground/90 hover:text-gold">{t("nav.faq")}</Link>
           {user ? (
             <>
-              <Link to="/orders" className="block text-foreground/90 hover:text-gold">{t("nav.myOrders")}</Link>
               {isAdmin && <Link to="/admin" className="block text-gold">{t("nav.admin")}</Link>}
               <button onClick={() => signOut()} className="block text-cosmic-silver/70">{t("nav.signOut")}</button>
             </>
