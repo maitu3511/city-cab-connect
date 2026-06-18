@@ -2,12 +2,23 @@ import { useEffect, useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import { supabase } from "@/integrations/supabase/client";
 
+const defaultVideos = [
+  { id: "v1", youtube_id: "8GW6sLrK40k", title: "Introduction to Vedic Astrology", category: "Vedic Basics", video_type: "video" },
+  { id: "v2", youtube_id: "Ksk3kP0YJzo", title: "Understanding Your Birth Chart (Kundli)", category: "Kundli", video_type: "video" },
+  { id: "v3", youtube_id: "0XFsHIO_KZE", title: "The 12 Zodiac Signs Explained", category: "Zodiac", video_type: "video" },
+  { id: "v4", youtube_id: "EShUeudtaFg", title: "Planets and their Influence", category: "Grahas", video_type: "video" },
+  { id: "v5", youtube_id: "CevxZvSJLk8", title: "Daily Cosmic Tip", category: "Tips", video_type: "short" },
+  { id: "v6", youtube_id: "kJQP7kiw5Fk", title: "Morning Mantra Practice", category: "Spiritual", video_type: "short" },
+];
+
 const Videos = () => {
-  const [videos, setVideos] = useState<any[]>([]);
+  const [videos, setVideos] = useState<any[]>(defaultVideos);
   const [type, setType] = useState<"all" | "video" | "short">("all");
 
   useEffect(() => {
-    supabase.from("videos").select("*").order("created_at", { ascending: false }).then(({ data }) => setVideos(data ?? []));
+    supabase.from("videos").select("*").order("created_at", { ascending: false }).then(({ data }) => {
+      if (data && data.length > 0) setVideos(data);
+    });
   }, []);
 
   const filtered = type === "all" ? videos : videos.filter((v) => v.video_type === type);

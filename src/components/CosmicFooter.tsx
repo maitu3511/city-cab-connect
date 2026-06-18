@@ -34,7 +34,7 @@ const CosmicFooter = () => {
             </p>
             <div className="flex gap-3">
               {[
-                { Icon: Instagram, href: "https://instagram.com" },
+                { Icon: Instagram, href: "https://www.instagram.com/astrowithhrishi_555?utm_source=qr" },
                 { Icon: Facebook, href: "https://facebook.com" },
                 { Icon: Youtube, href: "https://youtube.com" },
                 { Icon: MessageCircle, href: `https://wa.me/${WHATSAPP_NUMBER}` },

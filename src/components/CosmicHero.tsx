@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Sparkles, MessageCircle, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import zodiacWheel from "@/assets/zodiac-wheel.png";
+import astrologer from "@/assets/astrologer.png";
 import cosmicBg from "@/assets/cosmic-hero.jpg";
 
 const WHATSAPP_NUMBER = "918460107287";
@@ -24,20 +25,24 @@ const CosmicHero = () => {
 
       {/* Floating zodiac wheel */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.6, rotate: -30 }}
-        animate={{ opacity: 0.85, scale: 1, rotate: 0 }}
-        transition={{ duration: 1.6, ease: "easeOut" }}
-        className="absolute right-[-12%] top-[8%] sm:right-[-8%] lg:right-[2%] w-[420px] h-[420px] sm:w-[520px] sm:h-[520px] lg:w-[620px] lg:h-[620px] z-10 pointer-events-none"
+        initial={{ opacity: 0, scale: 0.6, y: 40 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 1.4, ease: "easeOut" }}
+        className="absolute right-[-6%] bottom-0 sm:right-[-2%] lg:right-[4%] w-[360px] h-[460px] sm:w-[460px] sm:h-[580px] lg:w-[560px] lg:h-[700px] z-10 pointer-events-none hidden md:block"
       >
-        <div className="absolute inset-0 rounded-full bg-gold/20 blur-[80px] animate-pulse-glow" />
+        <div className="absolute inset-0 rounded-full bg-gold/15 blur-[100px] animate-pulse-glow" />
         <img
           src={zodiacWheel}
-          alt="3D golden zodiac wheel"
-          className="relative animate-spin-slower drop-shadow-[0_0_60px_hsl(43_78%_58%/0.5)]"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 w-full opacity-30 animate-spin-slower"
         />
-        {/* Outer ring */}
-        <div className="absolute inset-[-8%] rounded-full border border-gold/20 animate-spin-slow" />
-        <div className="absolute inset-[-16%] rounded-full border border-cosmic-purple/20 animate-spin-slower" />
+        <div className="absolute inset-[6%] rounded-full border border-gold/15 animate-spin-slow" />
+        <img
+          src={astrologer}
+          alt="Astrologer Hrishi"
+          className="relative w-full h-full object-contain object-bottom drop-shadow-[0_30px_60px_hsl(43_78%_58%/0.45)]"
+        />
       </motion.div>
 
       <div className="container relative z-20 py-12">

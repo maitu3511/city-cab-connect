@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Award, BookOpen, Users, Star } from "lucide-react";
-import astrologer from "@/assets/astrologer.jpg";
+import astrologer from "@/assets/astrologer.png";
 
 const achievements = [
   { icon: Award, label: "Certified Vedic Astrologer", value: "Jyotish Acharya" },
@@ -25,12 +25,14 @@ const AboutSection = () => {
             <div className="relative aspect-[4/5] max-w-md mx-auto">
               <div className="absolute -inset-4 bg-gradient-to-br from-gold/30 via-cosmic-purple/30 to-cosmic-blue/30 rounded-3xl blur-2xl" />
               <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-gold via-cosmic-purple to-cosmic-blue opacity-60" />
-              <img
-                src={astrologer}
-                alt="Astrologer Hrishi"
-                className="relative w-full h-full object-cover rounded-3xl shadow-luxury"
-                loading="lazy"
-              />
+              <div className="relative w-full h-full rounded-3xl shadow-luxury overflow-hidden bg-gradient-to-br from-cosmic-purple/30 via-background to-cosmic-blue/30">
+                <img
+                  src={astrologer}
+                  alt="Astrologer Hrishi"
+                  className="absolute inset-0 w-full h-full object-contain object-bottom drop-shadow-[0_20px_40px_rgba(212,175,55,0.3)]"
+                  loading="lazy"
+                />
+              </div>
               {/* Decorative wheel */}
               <div className="absolute -bottom-6 -right-6 w-28 h-28 rounded-full glass-gold flex items-center justify-center animate-float">
                 <div className="text-center">
