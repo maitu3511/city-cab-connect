@@ -8,7 +8,8 @@ const Facebook = (p: React.SVGProps<SVGSVGElement>) => (
 const Youtube = (p: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" /><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" /></svg>
 );
-import { Sparkles, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
+import logo from "@/assets/logo.png";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { WHATSAPP_NUMBER, PHONE_NUMBER, EMAIL } from "@/lib/whatsapp";
@@ -21,8 +22,8 @@ const CosmicFooter = () => {
       <div className="container relative z-10">
         <div className="grid md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <Sparkles className="h-7 w-7 text-gold" />
+            <div className="flex items-center gap-3 mb-4">
+              <img src={logo} alt="Astro With Hrishi" className="h-12 w-12 object-contain drop-shadow-[0_0_12px_rgba(212,175,55,0.5)]" />
               <div>
                 <div className="font-display text-xl text-gradient-gold font-bold">Astro With Hrishi</div>
                 <div className="text-[10px] tracking-[0.3em] text-cosmic-silver/70 uppercase">{t("home.tagline")}</div>
@@ -85,9 +86,9 @@ const CosmicFooter = () => {
           </div>
         </div>
         <div className="gold-divider mb-6" />
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cosmic-silver/50">
-          <div>© {new Date().getFullYear()} Astro With Hrishi. {t("footer.rights")}</div>
-          <div className="font-serif italic">"{t("footer.quote")}" ✦</div>
+        <div className="flex flex-col items-center justify-center gap-2 text-xs text-cosmic-silver/60 text-center">
+          <div>© 2026 Astro With Hrishi. All rights reserved. Design and developed by <a href="#" className="text-gold hover:underline">SMD Nexa Solution - Maitri Patel</a></div>
+          <div className="font-serif italic text-cosmic-silver/50">"{t("footer.quote")}" ✦</div>
         </div>
       </div>
     </footer>
