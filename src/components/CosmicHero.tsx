@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Sparkles, MessageCircle, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import zodiacWheel from "@/assets/zodiac-wheel.png";
-import cosmicBg from "@/assets/cosmic-hero.jpg";
+import astrologer from "@/assets/astrologer.png";
 
 const WHATSAPP_NUMBER = "918460107287";
 
