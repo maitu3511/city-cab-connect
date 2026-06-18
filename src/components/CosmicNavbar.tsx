@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Sparkles, Phone } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useAuth } from "@/hooks/useAuth";
 import { PHONE_NUMBER } from "@/lib/whatsapp";
+import logo from "@/assets/logo.png";
 
 const CosmicNavbar = () => {
   const { t } = useTranslation();
@@ -36,8 +37,8 @@ const CosmicNavbar = () => {
       <div className="container flex items-center justify-between gap-4">
         <Link to="/" className="flex items-center gap-2 group flex-shrink-0">
           <div className="relative">
-            <Sparkles className="h-7 w-7 text-gold transition-transform group-hover:rotate-12" />
-            <div className="absolute inset-0 bg-gold/30 blur-xl group-hover:bg-gold/60 transition-all" />
+            <img src={logo} alt="Astro With Hrishi" className="h-11 w-11 object-contain drop-shadow-[0_0_12px_rgba(212,175,55,0.5)] transition-transform group-hover:scale-105" />
+            <div className="absolute inset-0 bg-gold/20 blur-xl group-hover:bg-gold/40 transition-all -z-10" />
           </div>
           <div className="leading-tight">
             <div className="font-display text-base sm:text-lg text-gradient-gold font-bold">Astro With Hrishi</div>
