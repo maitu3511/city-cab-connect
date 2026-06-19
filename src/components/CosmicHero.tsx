@@ -35,14 +35,9 @@ const CosmicHero = () => {
           src={zodiacWheel}
           alt=""
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 w-full opacity-30 animate-spin-slower"
+          className="absolute inset-0 w-full h-full object-contain opacity-60 animate-spin-slower"
         />
         <div className="absolute inset-[6%] rounded-full border border-gold/15 animate-spin-slow" />
-        <img
-          src={astrologer}
-          alt="Astrologer Hrishi"
-          className="relative w-full h-full object-contain object-bottom drop-shadow-[0_30px_60px_hsl(43_78%_58%/0.45)]"
-        />
       </motion.div>
 
       <div className="container relative z-20 py-12">
