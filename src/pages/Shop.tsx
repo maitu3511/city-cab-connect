@@ -51,7 +51,7 @@ const Shop = () => {
       <SEO
         title="Astrology Shop – Bracelets, Gemstones, Rudraksha | Astro With Hrishi"
         description="Shop energised astrology products: rose quartz, tiger eye, yellow sapphire, rudraksha mala, shri yantra and more. Order on WhatsApp."
-        canonical="/shop"
+        path="/shop"
       />
 
       <section className="container">
