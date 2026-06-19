@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Award, BookOpen, Users, Star } from "lucide-react";
-import astrologer from "@/assets/astrologer.png";
+import astrologer from "@/assets/astrologer.jpg";
 
 const achievements = [
   { icon: Award, label: "Certified Vedic Astrologer", value: "Jyotish Acharya" },
@@ -29,7 +29,7 @@ const AboutSection = () => {
                 <img
                   src={astrologer}
                   alt="Astrologer Hrishi"
-                  className="absolute inset-0 w-full h-full object-contain object-bottom drop-shadow-[0_20px_40px_rgba(212,175,55,0.3)]"
+                  className="absolute inset-0 w-full h-full object-cover drop-shadow-[0_20px_40px_rgba(212,175,55,0.3)]"
                   loading="lazy"
                 />
               </div>
