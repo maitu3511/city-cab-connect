@@ -54,6 +54,7 @@ const CosmicFooter = () => {
                 { l: t("nav.about"), to: "/about" },
                 { l: t("nav.services"), to: "/services" },
                 { l: t("nav.gallery"), to: "/gallery" },
+                { l: t("nav.shop"), to: "/shop" },
                 { l: t("nav.testimonials"), to: "/testimonials" },
                 { l: t("nav.booking"), to: "/booking" },
               ].map((x) => (
