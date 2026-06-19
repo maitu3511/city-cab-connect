@@ -12,6 +12,7 @@ const About = () => (
           <div className="relative aspect-[3/4] max-w-md mx-auto rounded-3xl overflow-hidden shadow-luxury border border-gold/30">
             <img src={astrologer} alt="Hrishi - Vedic Astrologer" className="w-full h-full object-cover" />
           </div>
+        </motion.div>
         <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} className="space-y-5 text-cosmic-silver/80">
           <p className="text-lg leading-relaxed">With over <span className="text-gold font-semibold">15 years</span> of dedicated Vedic study, Hrishi blends ancient Jyotish wisdom with modern psychology to deliver consultations that are both spiritually deep and practically actionable.</p>
           <p>Trained under traditional gurus in Varanasi and Ujjain, Hrishi specialises in Kundli analysis, marriage compatibility, career guidance, Vastu and remedial gemology. Every reading is personalised — no generic predictions, only sacred truth.</p>
