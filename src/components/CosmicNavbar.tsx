@@ -27,8 +27,7 @@ const CosmicNavbar = () => {
     { label: t("nav.about"), to: "/about" },
     { label: t("nav.services"), to: "/services" },
     { label: t("nav.gallery"), to: "/gallery" },
-    { label: t("nav.videos"), to: "/videos" },
-    { label: t("nav.blog"), to: "/blog" },
+    { label: t("nav.testimonials"), to: "/testimonials" },
     { label: t("nav.contact"), to: "/contact" },
   ];
 
@@ -79,7 +78,6 @@ const CosmicNavbar = () => {
             <Link key={l.to} to={l.to} className="block text-foreground/90 hover:text-gold transition-colors">{l.label}</Link>
           ))}
           <Link to="/booking" className="block text-gold">{t("nav.booking")}</Link>
-          <Link to="/testimonials" className="block text-foreground/90 hover:text-gold">{t("nav.testimonials")}</Link>
           <Link to="/faq" className="block text-foreground/90 hover:text-gold">{t("nav.faq")}</Link>
           {user ? (
             <>
