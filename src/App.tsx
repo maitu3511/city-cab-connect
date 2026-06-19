@@ -11,6 +11,7 @@ import About from "./pages/About";
 import Services from "./pages/Services";
 import Booking from "./pages/Booking";
 import Gallery from "./pages/Gallery";
+import Shop from "./pages/Shop";
 import Testimonials from "./pages/Testimonials";
 import Contact from "./pages/Contact";
 import { Privacy, Refund, Terms } from "./pages/Legal";
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/shop" element={<Shop />} />
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/faq" element={<Testimonials />} />
           <Route path="/contact" element={<Contact />} />

@@ -27,6 +27,7 @@ const CosmicNavbar = () => {
     { label: t("nav.about"), to: "/about" },
     { label: t("nav.services"), to: "/services" },
     { label: t("nav.gallery"), to: "/gallery" },
+    { label: t("nav.shop"), to: "/shop" },
     { label: t("nav.testimonials"), to: "/testimonials" },
     { label: t("nav.contact"), to: "/contact" },
   ];
