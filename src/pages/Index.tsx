@@ -7,6 +7,7 @@ import ServicesSection from "@/components/ServicesSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import BookingSection from "@/components/BookingSection";
 import CosmicFooter from "@/components/CosmicFooter";
+import TrustSection from "@/components/TrustSection";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import SEO from "@/components/SEO";
 
@@ -22,6 +23,7 @@ const Index = () => {
           <AboutSection />
           <StatsStrip />
           <ServicesSection />
+          <TrustSection />
           <TestimonialsSection />
           <BookingSection />
         </main>
