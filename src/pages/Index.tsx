@@ -13,7 +13,7 @@ import SEO from "@/components/SEO";
 const Index = () => {
   return (
     <div className="relative min-h-screen overflow-x-hidden">
-      <SEO title="Astro With Hrishi — Vedic Astrology & Spiritual Guidance" description="15+ years of authentic Vedic astrology. Personalized Kundli readings, marriage, career, and spiritual guidance from Astrologer Hrishi." path="/" />
+      <SEO title="Astro With Hrishi — Vedic Astrology & Spiritual Guidance" description="3+ years of authentic Vedic astrology. Personalized Kundli readings, marriage, career, and spiritual guidance from Astrologer Hrishi." path="/" />
       <StarField />
       <div className="relative z-10">
         <CosmicNavbar />

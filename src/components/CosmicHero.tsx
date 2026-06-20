@@ -55,7 +55,7 @@ const CosmicHero = () => {
           >
             <Sparkles className="h-3.5 w-3.5 text-gold animate-twinkle" />
             <span className="text-xs tracking-[0.25em] uppercase text-gold">
-              Vedic Astrologer · 15+ Years Experience
+              Vedic Astrologer · 3+ Years Experience
             </span>
           </motion.div>
 
@@ -111,7 +111,7 @@ const CosmicHero = () => {
             className="mt-14 grid grid-cols-3 gap-6 max-w-xl"
           >
             {[
-              { num: "15+", label: "Years" },
+              { num: "3+", label: "Years" },
               { num: "10K+", label: "Clients" },
               { num: "4.9★", label: "Rating" },
             ].map((s) => (

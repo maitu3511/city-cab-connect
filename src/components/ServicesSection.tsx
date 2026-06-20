@@ -8,16 +8,8 @@ import { Button } from "@/components/ui/button";
 const WHATSAPP_NUMBER = "918460107287";
 
 const services = [
-  { icon: ScrollText, title: "Kundli Reading", desc: "In-depth birth chart analysis revealing your life's blueprint, dashas & cosmic purpose.", price: "₹1,500", benefits: ["Detailed birth chart", "Dasha predictions", "Remedial guidance"] },
-  { icon: Heart, title: "Marriage Consultation", desc: "Compatibility analysis, muhurat selection & guidance for a harmonious matrimonial life.", price: "₹2,500", benefits: ["Kundli matching", "Auspicious timing", "Relationship insights"] },
-  { icon: Users, title: "Relationship Guidance", desc: "Resolve conflicts and deepen emotional bonds through astrological insights.", price: "₹2,000", benefits: ["Synastry analysis", "Conflict resolution", "Love forecasts"] },
-  { icon: Briefcase, title: "Career Astrology", desc: "Discover your ideal profession, growth windows & career-defining transits.", price: "₹2,000", benefits: ["Career direction", "Job change timing", "Success periods"] },
-  { icon: TrendingUp, title: "Business Astrology", desc: "Strategic guidance for startups, partnerships, expansions & financial decisions.", price: "₹3,500", benefits: ["Business muhurat", "Partner compatibility", "Growth planning"] },
-  { icon: Hash, title: "Numerology", desc: "Decode the vibrational power of your name & numbers for prosperity.", price: "₹1,200", benefits: ["Name analysis", "Lucky numbers", "Brand naming"] },
-  { icon: Home, title: "Vastu Consultation", desc: "Align your home or workspace with cosmic energy for peace & prosperity.", price: "₹3,000", benefits: ["Layout analysis", "Energy correction", "Without demolition"] },
-  { icon: Gem, title: "Gemstone Guidance", desc: "Personalized gemstone recommendations based on your unique planetary chart.", price: "₹1,500", benefits: ["Stone selection", "Wearing rituals", "Authentic sourcing"] },
-  { icon: Compass, title: "Horoscope Analysis", desc: "Annual & monthly forecasts to navigate opportunities and challenges ahead.", price: "₹1,800", benefits: ["Yearly outlook", "Monthly transits", "Action plans"] },
-  { icon: Sparkles, title: "Spiritual Guidance", desc: "Personalized sadhana, mantras & rituals to elevate your spiritual journey.", price: "₹2,500", benefits: ["Mantra diksha", "Daily practices", "Soul awakening"] },
+  { icon: ScrollText, title: "Kundli Reading", desc: "In-depth birth chart analysis revealing your life's blueprint, dashas & cosmic purpose.", benefits: ["Detailed birth chart", "Dasha predictions", "Remedial guidance"] },
+  { icon: Heart, title: "Marriage Consultation", desc: "Compatibility analysis, muhurat selection & guidance for a harmonious matrimonial life.", benefits: ["Kundli matching", "Auspicious timing", "Relationship insights"] },
 ];
 
 const ServicesSection = () => {
@@ -75,10 +67,6 @@ const ServicesSection = () => {
                     <div className="relative h-14 w-14 rounded-xl glass-gold flex items-center justify-center group-hover:scale-110 transition-transform">
                       <s.icon className="h-7 w-7 text-gold" />
                     </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-xs uppercase tracking-widest text-cosmic-silver/50">From</div>
-                    <div className="font-display text-2xl text-gradient-gold font-bold">{s.price}</div>
                   </div>
                 </div>
 

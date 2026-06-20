@@ -193,3 +193,11 @@
   background-size: 200% 100%;
   animation: shimmer 3s linear infinite;
 }
+
+/* Hide Google Translate banner */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-gadget,
+iframe.goog-te-banner-frame { display: none !important; }
+body { top: 0 !important; }
+.goog-tooltip, .goog-tooltip:hover { display: none !important; }
+.goog-text-highlight { background: none !important; box-shadow: none !important; }
