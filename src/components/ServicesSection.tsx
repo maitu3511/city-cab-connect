@@ -68,10 +68,6 @@ const ServicesSection = () => {
                       <s.icon className="h-7 w-7 text-gold" />
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className="text-xs uppercase tracking-widest text-cosmic-silver/50">From</div>
-                    <div className="font-display text-2xl text-gradient-gold font-bold">{s.price}</div>
-                  </div>
                 </div>
 
                 <h3 className="font-display text-xl font-semibold mb-3">{s.title}</h3>
