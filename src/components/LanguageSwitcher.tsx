@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Globe } from "lucide-react";
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
@@ -15,61 +15,79 @@ const langs = [
   { code: "en", label: "English" },
   { code: "hi", label: "हिंदी" },
   { code: "gu", label: "ગુજરાતી" },
-  { code: "mr", label: "मराठी" },
-  { code: "ta", label: "தமிழ்" },
-  { code: "te", label: "తెలుగు" },
-  { code: "bn", label: "বাংলা" },
 ];
 
-const setCookie = (lang: string) => {
-  const value = `/en/${lang}`;
-  // domain variants — Google Translate reads this cookie
-  document.cookie = `googtrans=${value};path=/`;
-  document.cookie = `googtrans=${value};path=/;domain=${window.location.hostname}`;
-  const root = "." + window.location.hostname.split(".").slice(-2).join(".");
-  document.cookie = `googtrans=${value};path=/;domain=${root}`;
-};
-
-const getCurrent = () => {
-  const m = document.cookie.match(/googtrans=\/[a-z-]+\/([a-z-]+)/i);
-  return m ? m[1] : "en";
-};
-
 const LanguageSwitcher = () => {
+  const [current, setCurrent] = useState("en");
+
   useEffect(() => {
-    if (document.getElementById("google-translate-script")) return;
-    window.googleTranslateElementInit = () => {
-      new window.google.translate.TranslateElement(
-        {
-          pageLanguage: "en",
-          includedLanguages: langs.map((l) => l.code).join(","),
-          autoDisplay: false,
-          layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
-        },
-        "google_translate_element"
-      );
-    };
-    const s = document.createElement("script");
-    s.id = "google-translate-script";
-    s.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-    s.async = true;
-    document.body.appendChild(s);
+    const saved = localStorage.getItem("awh-lang") || "en";
+    setCurrent(saved);
+
+    if (!document.getElementById("google-translate-script")) {
+      window.googleTranslateElementInit = () => {
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "en,hi,gu",
+            autoDisplay: false,
+          },
+          "google_translate_element"
+        );
+      };
+      const s = document.createElement("script");
+      s.id = "google-translate-script";
+      s.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      s.async = true;
+      document.body.appendChild(s);
+    }
+
+    // Apply saved language once the select is available
+    if (saved !== "en") {
+      const tryApply = (tries = 0) => {
+        const sel = document.querySelector<HTMLSelectElement>(".goog-te-combo");
+        if (sel) {
+          sel.value = saved;
+          sel.dispatchEvent(new Event("change"));
+        } else if (tries < 40) {
+          setTimeout(() => tryApply(tries + 1), 250);
+        }
+      };
+      tryApply();
+    }
   }, []);
 
   const change = (code: string) => {
-    setCookie(code);
-    window.location.reload();
+    localStorage.setItem("awh-lang", code);
+    setCurrent(code);
+    const sel = document.querySelector<HTMLSelectElement>(".goog-te-combo");
+    if (sel) {
+      sel.value = code === "en" ? "" : code;
+      sel.dispatchEvent(new Event("change"));
+      if (code === "en") {
+        // Force restore by reloading without translate cookies
+        setTimeout(() => window.location.reload(), 100);
+      }
+    } else {
+      // Script not ready — reload with cookie fallback
+      const host = window.location.hostname;
+      const val = `/en/${code}`;
+      document.cookie = `googtrans=${val};path=/`;
+      document.cookie = `googtrans=${val};path=/;domain=${host}`;
+      document.cookie = `googtrans=${val};path=/;domain=.${host}`;
+      window.location.reload();
+    }
   };
 
-  const current = langs.find((l) => l.code === getCurrent()) ?? langs[0];
+  const currentLabel = langs.find((l) => l.code === current)?.label ?? "English";
 
   return (
     <>
-      <div id="google_translate_element" style={{ display: "none" }} />
+      <div id="google_translate_element" style={{ position: "absolute", left: "-9999px", top: "-9999px" }} />
       <DropdownMenu>
         <DropdownMenuTrigger className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-cosmic-silver/80 hover:text-gold transition-colors notranslate">
           <Globe className="h-4 w-4" />
-          {current.label}
+          {currentLabel}
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="glass-gold border-gold/30 notranslate">
           {langs.map((l) => (
