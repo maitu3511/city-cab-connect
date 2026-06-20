@@ -1,98 +1,70 @@
 import { useEffect, useState } from "react";
-import { Globe } from "lucide-react";
+import { Globe, Check } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-declare global {
-  interface Window {
-    google?: any;
-    googleTranslateElementInit?: () => void;
-  }
-}
-
 const langs = [
-  { code: "en", label: "English" },
-  { code: "hi", label: "हिंदी" },
-  { code: "gu", label: "ગુજરાતી" },
+  { code: "en", label: "English", native: "EN" },
+  { code: "hi", label: "हिंदी", native: "HI" },
+  { code: "gu", label: "ગુજરાતી", native: "GU" },
 ];
 
 const LanguageSwitcher = () => {
-  const [current, setCurrent] = useState("en");
+  const { i18n } = useTranslation();
+  const [current, setCurrent] = useState(i18n.language || "en");
+  const [flash, setFlash] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("awh-lang") || "en";
-    setCurrent(saved);
-
-    if (!document.getElementById("google-translate-script")) {
-      window.googleTranslateElementInit = () => {
-        new window.google.translate.TranslateElement(
-          {
-            pageLanguage: "en",
-            includedLanguages: "en,hi,gu",
-            autoDisplay: false,
-          },
-          "google_translate_element"
-        );
-      };
-      const s = document.createElement("script");
-      s.id = "google-translate-script";
-      s.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-      s.async = true;
-      document.body.appendChild(s);
+    const saved = localStorage.getItem("awh-lang");
+    if (saved && saved !== i18n.language) {
+      i18n.changeLanguage(saved);
+      setCurrent(saved);
     }
-
-    // Apply saved language once the select is available
-    if (saved !== "en") {
-      const tryApply = (tries = 0) => {
-        const sel = document.querySelector<HTMLSelectElement>(".goog-te-combo");
-        if (sel) {
-          sel.value = saved;
-          sel.dispatchEvent(new Event("change"));
-        } else if (tries < 40) {
-          setTimeout(() => tryApply(tries + 1), 250);
-        }
-      };
-      tryApply();
-    }
-  }, []);
+  }, [i18n]);
 
   const change = (code: string) => {
+    if (code === current) return;
     localStorage.setItem("awh-lang", code);
+    i18n.changeLanguage(code);
     setCurrent(code);
-    const sel = document.querySelector<HTMLSelectElement>(".goog-te-combo");
-    if (sel) {
-      sel.value = code === "en" ? "" : code;
-      sel.dispatchEvent(new Event("change"));
-      if (code === "en") {
-        // Force restore by reloading without translate cookies
-        setTimeout(() => window.location.reload(), 100);
-      }
-    } else {
-      // Script not ready — reload with cookie fallback
-      const host = window.location.hostname;
-      const val = `/en/${code}`;
-      document.cookie = `googtrans=${val};path=/`;
-      document.cookie = `googtrans=${val};path=/;domain=${host}`;
-      document.cookie = `googtrans=${val};path=/;domain=.${host}`;
-      window.location.reload();
-    }
+    document.documentElement.lang = code;
+    setFlash(true);
+    setTimeout(() => setFlash(false), 600);
   };
 
-  const currentLabel = langs.find((l) => l.code === current)?.label ?? "English";
+  const currentLang = langs.find((l) => l.code === current) ?? langs[0];
 
   return (
     <>
-      <div id="google_translate_element" style={{ position: "absolute", left: "-9999px", top: "-9999px" }} />
+      <AnimatePresence>
+        {flash && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="fixed inset-0 z-[100] pointer-events-none bg-gold/10"
+          />
+        )}
+      </AnimatePresence>
       <DropdownMenu>
-        <DropdownMenuTrigger className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-cosmic-silver/80 hover:text-gold transition-colors notranslate">
+        <DropdownMenuTrigger className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-cosmic-silver/80 hover:text-gold transition-colors px-2 py-1.5 rounded-md hover:bg-gold/5">
           <Globe className="h-4 w-4" />
-          {currentLabel}
+          <span className="hidden sm:inline">{currentLang.label}</span>
+          <span className="sm:hidden">{currentLang.native}</span>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="glass-gold border-gold/30 notranslate">
+        <DropdownMenuContent align="end" className="glass-gold border-gold/30 min-w-[160px]">
           {langs.map((l) => (
-            <DropdownMenuItem key={l.code} onClick={() => change(l.code)} className="cursor-pointer">
-              {l.label}
+            <DropdownMenuItem
+              key={l.code}
+              onClick={() => change(l.code)}
+              className="cursor-pointer flex items-center justify-between gap-3"
+            >
+              <span>{l.label}</span>
+              {current === l.code && <Check className="h-3.5 w-3.5 text-gold" />}
             </DropdownMenuItem>
           ))}
         </DropdownMenuContent>
