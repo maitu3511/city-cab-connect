@@ -36,7 +36,7 @@ const AboutSection = () => {
               {/* Decorative wheel */}
               <div className="absolute -bottom-6 -right-6 w-28 h-28 rounded-full glass-gold flex items-center justify-center animate-float">
                 <div className="text-center">
-                  <div className="font-display text-2xl text-gradient-gold font-bold">15+</div>
+                  <div className="font-display text-2xl text-gradient-gold font-bold">3+</div>
                   <div className="text-[10px] uppercase tracking-widest text-cosmic-silver/80">
                     Years
                   </div>
