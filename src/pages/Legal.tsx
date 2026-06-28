@@ -33,7 +33,7 @@ export const Refund = () => (
     <h2 className="text-gold font-display text-xl mt-6 mb-2">Digital Reports</h2>
     <p>PDF reports and digital downloads are non-refundable once delivered.</p>
     <h2 className="text-gold font-display text-xl mt-6 mb-2">Process</h2>
-    <p>To request a refund, WhatsApp us at +91 84601 07287 with your order ID and reason.</p>
+    <p>To request a refund, WhatsApp us at +91 9558565655 with your order ID and reason.</p>
   </Doc>
 );
 
@@ -51,6 +51,6 @@ export const Terms = () => (
     <h2 className="text-gold font-display text-xl mt-6 mb-2">Limitation of Liability</h2>
     <p>To the maximum extent permitted by law, we are not liable for any indirect or consequential damages arising from use of our services.</p>
     <h2 className="text-gold font-display text-xl mt-6 mb-2">Governing Law</h2>
-    <p>These terms are governed by the laws of India. Jurisdiction lies with the courts of Ahmedabad, Gujarat.</p>
+    <p>These terms are governed by the laws of India. Jurisdiction lies with the courts of Vadodara, Gujarat.</p>
   </Doc>
 );

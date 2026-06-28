@@ -80,7 +80,7 @@ const CosmicFooter = () => {
               <li className="flex items-center gap-2"><Phone className="h-4 w-4 text-gold flex-shrink-0" /><a href={`tel:${PHONE_NUMBER}`} className="hover:text-gold">{PHONE_NUMBER}</a></li>
               <li className="flex items-center gap-2"><MessageCircle className="h-4 w-4 text-gold flex-shrink-0" /><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="hover:text-gold">WhatsApp</a></li>
               <li className="flex items-center gap-2"><Mail className="h-4 w-4 text-gold flex-shrink-0" /><a href={`mailto:${EMAIL}`} className="hover:text-gold">{EMAIL}</a></li>
-              <li className="flex items-start gap-2"><MapPin className="h-4 w-4 text-gold flex-shrink-0 mt-0.5" /><span>Ahmedabad, Gujarat<br />India</span></li>
+              <li className="flex items-start gap-2"><MapPin className="h-4 w-4 text-gold flex-shrink-0 mt-0.5" /><span>Vadodara, Gujarat<br />India</span></li>
             </ul>
           </div>
         </div>

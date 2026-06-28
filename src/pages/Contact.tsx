@@ -26,7 +26,7 @@ const Contact = () => {
 
   return (
     <PageLayout title="Get in Touch" subtitle="We respond within hours on WhatsApp.">
-      <SEO title="Contact — Astro With Hrishi" description="Call, WhatsApp or email Astrologer Hrishi. Based in Ahmedabad, serving clients worldwide." path="/contact" />
+      <SEO title="Contact — Astro With Hrishi" description="Call, WhatsApp or email Astrologer Hrishi. Based in Vadodara, serving clients worldwide." path="/contact" />
       <div className="container max-w-6xl space-y-10">
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-3">
@@ -34,7 +34,7 @@ const Contact = () => {
               { Icon: Phone, label: "Call", value: PHONE_NUMBER, href: `tel:${PHONE_NUMBER}` },
               { Icon: MessageCircle, label: "WhatsApp", value: PHONE_NUMBER, href: `https://wa.me/${WHATSAPP_NUMBER}` },
               { Icon: Mail, label: "Email", value: EMAIL, href: `mailto:${EMAIL}` },
-              { Icon: MapPin, label: "Location", value: "Ahmedabad, Gujarat, India" },
+              { Icon: MapPin, label: "Location", value: "Vadodara, Gujarat, India" },
             ].map(({ Icon, label, value, href }, i) => (
               <a key={i} href={href} className="glass-gold rounded-2xl p-5 flex items-center gap-4 hover:glow-gold transition-all">
                 <div className="h-12 w-12 rounded-full bg-gradient-gold flex items-center justify-center"><Icon className="h-5 w-5 text-primary-foreground" /></div>
@@ -65,7 +65,7 @@ const Contact = () => {
         <div className="relative rounded-3xl overflow-hidden glass-gold p-1 shadow-luxury">
           <iframe
             title="Astro With Hrishi location"
-            src="https://www.google.com/maps?q=Ahmedabad%2C+Gujarat%2C+India&output=embed"
+            src="https://www.google.com/maps?q=Vadodara%2C+Gujarat%2C+India&output=embed"
             className="w-full h-[360px] rounded-[1.4rem]"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"

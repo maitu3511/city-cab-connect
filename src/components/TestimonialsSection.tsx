@@ -10,7 +10,7 @@ const testimonials = [
   },
   {
     name: "Rohan Mehta",
-    location: "Ahmedabad",
+    location: "Vadodara",
     rating: 5,
     text: "The business name numerology consultation transformed my startup's trajectory. Revenue increased 3x within months of implementing the suggested changes.",
   },

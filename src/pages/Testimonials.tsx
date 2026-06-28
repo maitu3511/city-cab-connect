@@ -3,7 +3,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const faqs = [
-  { q: "How do consultations work?", a: "After booking, you'll receive a WhatsApp confirmation. Sessions can be conducted via call, video, or in-person in Ahmedabad. Provide accurate birth details for the most precise reading." },
+  { q: "How do consultations work?", a: "After booking, you'll receive a WhatsApp confirmation. Sessions can be conducted via call, video, or in-person in Vadodara. Provide accurate birth details for the most precise reading." },
   { q: "What information do I need to share?", a: "Your full name, exact date of birth, time of birth, and place of birth. This is essential for accurate Kundli analysis." },
   { q: "Are my details kept confidential?", a: "Absolutely. All consultations and personal data are 100% private. We never share your information." },
   { q: "How are gemstones authenticated?", a: "Every gemstone comes with a government-recognised lab certificate (IGI/GIA). They are also energised by Hrishi ji before dispatch." },

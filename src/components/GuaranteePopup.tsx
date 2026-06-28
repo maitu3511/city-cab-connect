@@ -53,9 +53,9 @@ const GuaranteePopup = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 50 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed inset-4 sm:inset-auto sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 z-[160] sm:max-w-md"
+            className="fixed inset-0 flex items-center justify-center p-4 z-[160]"
           >
-            <div className="relative w-full h-full sm:h-auto glass-gold rounded-3xl overflow-hidden shadow-2xl">
+            <div className="relative w-full max-w-md glass-gold rounded-3xl overflow-hidden shadow-2xl">
               {/* Decorative background */}
               <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-transparent to-cosmic-purple/10" />
               <div className="absolute -top-24 -right-24 w-48 h-48 bg-gold/20 rounded-full blur-3xl" />

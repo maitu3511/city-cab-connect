@@ -1,7 +1,7 @@
 export const WHATSAPP_NUMBER = "919558565655";
 export const PHONE_NUMBER = "+91 9558565655";
 export const EMAIL = "hello@astrowithhrishi.com";
-export const ADDRESS = "Ahmedabad, Gujarat, India";
+export const ADDRESS = "Vadodara, Gujarat, India";
 
 export const waLink = (message: string, number = WHATSAPP_NUMBER) =>
   `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
