@@ -11,12 +11,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { openWhatsApp } from "@/lib/whatsapp";
 import { toast } from "sonner";
 
-const WHATSAPP_NUMBER = "918460107287";
+const WHATSAPP_NUMBER = "919558565655";
 
 const services = [
-  "Kundli Reading", "Marriage Consultation", "Relationship Guidance",
-  "Career Astrology", "Business Astrology", "Numerology",
-  "Vastu Consultation", "Gemstone Guidance", "Horoscope Analysis", "Spiritual Guidance",
+  "Astrology", "Numerology", "Mobile Number Numerology", "Name Numerology",
+  "Business Name Selection", "Brand Name Numerology", "Logo Guidance",
+  "Marketing Strategy", "Business Planning", "Complete Startup Consultation",
 ];
 
 const BookingSection = () => {

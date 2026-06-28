@@ -5,25 +5,41 @@ import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
 import { supabase } from "@/integrations/supabase/client";
 
-const cats = ["all", "events", "clients", "spiritual", "photos"];
+const cats = ["all", "zodiac", "cosmic", "numerology", "meditation", "spiritual"];
 
 const defaultGallery = [
-  { id: "d1", category: "spiritual", caption: "Cosmos & constellations", image_url: "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1200&q=80" },
-  { id: "d2", category: "spiritual", caption: "Starry night sky", image_url: "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?w=1200&q=80" },
-  { id: "d3", category: "spiritual", caption: "Milky way galaxy", image_url: "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=1200&q=80" },
-  { id: "d4", category: "spiritual", caption: "Sacred crystals & gemstones", image_url: "https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?w=1200&q=80" },
-  { id: "d5", category: "spiritual", caption: "Tarot divination cards", image_url: "https://images.unsplash.com/photo-1601024445121-e5b82f020549?w=1200&q=80" },
-  { id: "d6", category: "events", caption: "Sacred fire ritual (Havan)", image_url: "https://images.unsplash.com/photo-1604608672516-f1b9b1d1b1f7?w=1200&q=80" },
-  { id: "d7", category: "spiritual", caption: "Meditation & mindfulness", image_url: "https://images.unsplash.com/photo-1528319725582-ddc096101511?w=1200&q=80" },
-  { id: "d8", category: "photos", caption: "Hindu temple architecture", image_url: "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=1200&q=80" },
-  { id: "d9", category: "spiritual", caption: "Rudraksha mala beads", image_url: "https://images.unsplash.com/photo-1545048702-79362596cdc9?w=1200&q=80" },
-  { id: "d10", category: "events", caption: "Yantra sacred geometry", image_url: "https://images.unsplash.com/photo-1507434965515-61970f2bd7c6?w=1200&q=80" },
-  { id: "d11", category: "clients", caption: "Astrology consultation", image_url: "https://images.unsplash.com/photo-1515894203077-9cd36032142f?w=1200&q=80" },
-  { id: "d12", category: "spiritual", caption: "Moon & planets", image_url: "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=1200&q=80" },
-  { id: "d13", category: "spiritual", caption: "Incense & spiritual rituals", image_url: "https://images.unsplash.com/photo-1545389336-cf090694435e?w=1200&q=80" },
-  { id: "d14", category: "spiritual", caption: "Brass diya & oil lamps", image_url: "https://images.unsplash.com/photo-1604608672516-f1b9b1d1b1f7?w=1200&q=80" },
-  { id: "d15", category: "events", caption: "Spiritual gathering", image_url: "https://images.unsplash.com/photo-1532968961962-8a0cb3a2d4f5?w=1200&q=80" },
-  { id: "d16", category: "spiritual", caption: "Cosmic energy & chakras", image_url: "https://images.unsplash.com/photo-1505506874110-6a7a69ba1de7?w=1200&q=80" },
+  // Zodiac Signs
+  { id: "z1", category: "zodiac", caption: "Zodiac Constellation Map", image_url: "https://images.unsplash.com/photo-1509117345201-ce2d652da06e?w=1200&q=80" },
+  { id: "z2", category: "zodiac", caption: "Celestial Zodiac Wheel", image_url: "https://images.unsplash.com/photo-1532968961962-8a0cb3a2d4f5?w=1200&q=80" },
+  { id: "z3", category: "zodiac", caption: "Astrology Birth Chart", image_url: "https://images.unsplash.com/photo-1601024445121-e5b82f020549?w=1200&q=80" },
+  { id: "z4", category: "zodiac", caption: "Horoscope Symbols", image_url: "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1200&q=80" },
+
+  // Cosmic / Planets
+  { id: "c1", category: "cosmic", caption: "Milky Way Galaxy", image_url: "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=1200&q=80" },
+  { id: "c2", category: "cosmic", caption: "Cosmic Nebula", image_url: "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?w=1200&q=80" },
+  { id: "c3", category: "cosmic", caption: "Moon & Planets", image_url: "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=1200&q=80" },
+  { id: "c4", category: "cosmic", caption: "Star Formation", image_url: "https://images.unsplash.com/photo-1462332420958-a05d1d454a34?w=1200&q=80" },
+  { id: "c5", category: "cosmic", caption: "Deep Space Wonders", image_url: "https://images.unsplash.com/photo-1464802688872-617fa5c92d80?w=1200&q=80" },
+
+  // Numerology
+  { id: "n1", category: "numerology", caption: "Sacred Numbers", image_url: "https://images.unsplash.com/photo-1501137983254-0c9e8d5b90de?w=1200&q=80" },
+  { id: "n2", category: "numerology", caption: "Numerology Symbols", image_url: "https://images.unsplash.com/photo-1580953122422-5e7b3e5c1c9a?w=1200&q=80" },
+  { id: "n3", category: "numerology", caption: "Birth Number Analysis", image_url: "https://images.unsplash.com/photo-1559526324-593e20b98e11?w=1200&q=80" },
+  { id: "n4", category: "numerology", caption: "Name Numerology Chart", image_url: "https://images.unsplash.com/photo-1551288049-bebda4e0d07a?w=1200&q=80" },
+
+  // Meditation
+  { id: "m1", category: "meditation", caption: "Deep Meditation State", image_url: "https://images.unsplash.com/photo-1528319725582-ddc096101511?w=1200&q=80" },
+  { id: "m2", category: "meditation", caption: "Third Eye Awakening", image_url: "https://images.unsplash.com/photo-1506126613408-eca21e2c16e4?w=1200&q=80" },
+  { id: "m3", category: "meditation", caption: "Chakra Alignment", image_url: "https://images.unsplash.com/photo-1505506874110-6a7a69ba1de7?w=1200&q=80" },
+  { id: "m4", category: "meditation", caption: "Spiritual Awakening", image_url: "https://images.unsplash.com/photo-1518241353330-0f2436cc0393?w=1200&q=80" },
+
+  // Spiritual / Kundli / Rituals
+  { id: "s1", category: "spiritual", caption: "Rudraksha Mala Beads", image_url: "https://images.unsplash.com/photo-1545048702-79362596cdc9?w=1200&q=80" },
+  { id: "s2", category: "spiritual", caption: "Sacred Crystals & Gemstones", image_url: "https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?w=1200&q=80" },
+  { id: "s3", category: "spiritual", caption: "Yantra Sacred Geometry", image_url: "https://images.unsplash.com/photo-1507434965515-61970f2bd7c6?w=1200&q=80" },
+  { id: "s4", category: "spiritual", caption: "Hindu Temple Architecture", image_url: "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=1200&q=80" },
+  { id: "s5", category: "spiritual", caption: "Brass Diya & Lamps", image_url: "https://images.unsplash.com/photo-1528319725582-ddc096101511?w=1200&q=80" },
+  { id: "s6", category: "spiritual", caption: "Incense & Rituals", image_url: "https://images.unsplash.com/photo-1545389336-cf090694435e?w=1200&q=80" },
 ];
 
 const Gallery = () => {

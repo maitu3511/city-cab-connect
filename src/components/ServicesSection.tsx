@@ -1,15 +1,19 @@
 import { motion } from "framer-motion";
-import {
-  ScrollText, Heart, Users, Briefcase, TrendingUp, Hash,
-  Home, Gem, Sparkles, Compass, MessageCircle, ArrowRight,
-} from "lucide-react";
+import { ScrollText, Heart, Users, Briefcase, TrendingUp, Hash, Hop as Home, Gem, Sparkles, Compass, MessageCircle, ArrowRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const WHATSAPP_NUMBER = "918460107287";
+const WHATSAPP_NUMBER = "919558565655";
 
 const services = [
-  { icon: ScrollText, title: "Kundli Reading", desc: "In-depth birth chart analysis revealing your life's blueprint, dashas & cosmic purpose.", benefits: ["Detailed birth chart", "Dasha predictions", "Remedial guidance"] },
-  { icon: Heart, title: "Marriage Consultation", desc: "Compatibility analysis, muhurat selection & guidance for a harmonious matrimonial life.", benefits: ["Kundli matching", "Auspicious timing", "Relationship insights"] },
+  { icon: ScrollText, title: "Astrology", desc: "In-depth birth chart analysis revealing your life's blueprint, planetary influences & cosmic purpose.", benefits: ["Kundli analysis", "Planetary predictions", "Remedial guidance"] },
+  { icon: Hash, title: "Numerology", desc: "Unlock the power of numbers in your life through name and birth date analysis.", benefits: ["Life path number", "Name correction", "Lucky numbers"] },
+  { icon: Phone, title: "Mobile Number Numerology", desc: "Discover how your mobile number influences your energy and success.", benefits: ["Number analysis", "Lucky mobile number", "Energy alignment"] },
+  { icon: Users, title: "Name Numerology", desc: "Get the perfect name spelling for success, prosperity and happiness.", benefits: ["Name correction", "Spelling optimization", "Signature analysis"] },
+  { icon: Briefcase, title: "Business Name Selection", desc: "Choose the perfect business name aligned with numerological vibrations for success.", benefits: ["Business numerology", "Name vibration analysis", "Success alignment"] },
+  { icon: Sparkles, title: "Brand Name Numerology", desc: "Create powerful brand names that resonate with your business goals.", benefits: ["Brand vibration", "Market appeal", "Growth energy"] },
+  { icon: Gem, title: "Logo Guidance", desc: "Design logos with numerological and astrological principles for maximum impact.", benefits: ["Color psychology", "Symbol selection", "Energy alignment"] },
+  { icon: TrendingUp, title: "Marketing Strategy", desc: "Strategic marketing guidance aligned with your business's cosmic blueprint.", benefits: ["Market timing", "Campaign planning", "Growth strategy"] },
+  { icon: Home, title: "Complete Startup Consultation", desc: "End-to-end guidance for your startup journey from ideation to success.", benefits: ["Business planning", "Financial guidance", "Complete mentorship"] },
 ];
 
 const ServicesSection = () => {

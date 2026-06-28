@@ -1,3 +1,4 @@
+import { useState } from "react";
 import StarField from "@/components/StarField";
 import CosmicNavbar from "@/components/CosmicNavbar";
 import CosmicHero from "@/components/CosmicHero";
@@ -9,27 +10,39 @@ import BookingSection from "@/components/BookingSection";
 import CosmicFooter from "@/components/CosmicFooter";
 import TrustSection from "@/components/TrustSection";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import SplashLoader from "@/components/SplashLoader";
+import GuaranteePopup from "@/components/GuaranteePopup";
 import SEO from "@/components/SEO";
 
 const Index = () => {
+  const [loading, setLoading] = useState(true);
+
   return (
     <div className="relative min-h-screen overflow-x-hidden">
       <SEO title="Astro With Hrishi — Vedic Astrology & Spiritual Guidance" description="3+ years of authentic Vedic astrology. Personalized Kundli readings, marriage, career, and spiritual guidance from Astrologer Hrishi." path="/" />
-      <StarField />
-      <div className="relative z-10">
-        <CosmicNavbar />
-        <main>
-          <CosmicHero />
-          <AboutSection />
-          <StatsStrip />
-          <ServicesSection />
-          <TrustSection />
-          <TestimonialsSection />
-          <BookingSection />
-        </main>
-        <CosmicFooter />
-        <FloatingWhatsApp />
-      </div>
+
+      {loading && <SplashLoader onLoadComplete={() => setLoading(false)} />}
+
+      {!loading && (
+        <>
+          <StarField />
+          <div className="relative z-10">
+            <CosmicNavbar />
+            <main>
+              <CosmicHero />
+              <AboutSection />
+              <StatsStrip />
+              <ServicesSection />
+              <TrustSection />
+              <TestimonialsSection />
+              <BookingSection />
+            </main>
+            <CosmicFooter />
+            <FloatingWhatsApp />
+          </div>
+          <GuaranteePopup />
+        </>
+      )}
     </div>
   );
 };

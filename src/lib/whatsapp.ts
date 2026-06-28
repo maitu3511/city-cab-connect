@@ -1,5 +1,5 @@
-export const WHATSAPP_NUMBER = "918460107287";
-export const PHONE_NUMBER = "+918460107287";
+export const WHATSAPP_NUMBER = "919558565655";
+export const PHONE_NUMBER = "+91 9558565655";
 export const EMAIL = "hello@astrowithhrishi.com";
 export const ADDRESS = "Ahmedabad, Gujarat, India";
 

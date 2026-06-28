@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
-import { Sparkles, MessageCircle, ArrowDown } from "lucide-react";
+import { Sparkles, MessageCircle, ArrowDown, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import zodiacWheel from "@/assets/zodiac-wheel.png";
 
 import cosmicBg from "@/assets/cosmic-hero.jpg";
 
-const WHATSAPP_NUMBER = "918460107287";
+const WHATSAPP_NUMBER = "919558565655";
+const PHONE_NUMBER = "+91 9558565655";
 
 const CosmicHero = () => {
   return (
@@ -55,7 +56,7 @@ const CosmicHero = () => {
           >
             <Sparkles className="h-3.5 w-3.5 text-gold animate-twinkle" />
             <span className="text-xs tracking-[0.25em] uppercase text-gold">
-              Vedic Astrologer · 3+ Years Experience
+              Astrology · Numerology · Spiritual Guidance
             </span>
           </motion.div>
 
@@ -69,12 +70,10 @@ const CosmicHero = () => {
           </h1>
 
           <p className="text-base sm:text-lg text-cosmic-silver/80 mb-10 max-w-xl leading-relaxed">
-            Discover ancient Vedic wisdom blended with modern insight. Personalized
-            Kundli readings, life-changing guidance & spiritual clarity — delivered
-            with the precision of the stars.
+            Transform your life with Astrology, Numerology, Business Name Numerology & Complete Startup Consultation. Professional guidance for every cosmic journey.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-wrap gap-4">
             <Button
               size="lg"
               className="bg-gradient-gold text-primary-foreground font-semibold text-base px-8 py-6 glow-gold hover:scale-105 transition-transform"
@@ -83,6 +82,16 @@ const CosmicHero = () => {
               <a href="#booking">
                 <Sparkles className="mr-2 h-5 w-5" />
                 Book Consultation
+              </a>
+            </Button>
+            <Button
+              size="lg"
+              className="bg-green-600 hover:bg-green-700 text-white font-semibold text-base px-8 py-6"
+              asChild
+            >
+              <a href={`tel:${PHONE_NUMBER}`}>
+                <Phone className="mr-2 h-5 w-5" />
+                Call Now
               </a>
             </Button>
             <Button
@@ -99,7 +108,7 @@ const CosmicHero = () => {
               }
             >
               <MessageCircle className="mr-2 h-5 w-5" />
-              Chat on WhatsApp
+              WhatsApp
             </Button>
           </div>
 
@@ -111,8 +120,8 @@ const CosmicHero = () => {
             className="mt-14 grid grid-cols-3 gap-6 max-w-xl"
           >
             {[
-              { num: "3+", label: "Years" },
-              { num: "10K+", label: "Clients" },
+              { num: "500+", label: "Consultations" },
+              { num: "98%", label: "Satisfaction" },
               { num: "4.9★", label: "Rating" },
             ].map((s) => (
               <div key={s.label} className="text-center">

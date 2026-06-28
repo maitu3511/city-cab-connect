@@ -6,43 +6,47 @@ const testimonials = [
     name: "Priya Sharma",
     location: "Mumbai",
     rating: 5,
-    text: "Hrishi ji's Kundli reading was breathtakingly accurate. He predicted my career shift months before it happened. Truly a master of his craft.",
+    text: "The astrology reading was breathtakingly accurate. My career predictions came true exactly as told. Truly a master of the cosmic arts!",
   },
   {
     name: "Rohan Mehta",
     location: "Ahmedabad",
     rating: 5,
-    text: "The marriage consultation gave us such clarity. His remedies brought peace to our family. I cannot thank him enough.",
+    text: "The business name numerology consultation transformed my startup's trajectory. Revenue increased 3x within months of implementing the suggested changes.",
   },
   {
     name: "Anjali Desai",
     location: "Surat",
     rating: 5,
-    text: "Business astrology session transformed my decision-making. I expanded my startup at the exact muhurat he suggested — pure magic.",
+    text: "Mobile number numerology guidance changed my energy completely. Everything started falling into place after following the recommendations.",
   },
   {
     name: "Vikram Patel",
     location: "Vadodara",
     rating: 5,
-    text: "His gemstone guidance changed everything. Within months I felt mental clarity I hadn't in years. Truly divine guidance.",
+    text: "The complete startup consultation gave me clarity I never had before. From business planning to marketing strategy, every aspect was covered.",
   },
   {
     name: "Neha Joshi",
     location: "Delhi",
     rating: 5,
-    text: "The vastu consultation for our new home brought harmony we didn't know was missing. Hrishi ji is patient, kind & deeply knowledgeable.",
+    text: "Name numerology correction brought harmony to my personal and professional life. Highly recommend for anyone seeking positive transformation.",
   },
   {
     name: "Arjun Kapoor",
     location: "Pune",
     rating: 5,
-    text: "Career astrology helped me pivot to my dream role. Every prediction unfolded exactly as he said. Forever grateful.",
+    text: "Brand name numerology helped me choose the perfect name for my company. The energy and response from market has been incredible.",
   },
 ];
 
 const TestimonialsSection = () => {
   return (
-    <section id="testimonials" className="relative py-24 sm:py-32">
+    <section id="testimonials" className="relative py-24 sm:py-32 overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-0 left-1/4 w-64 h-64 bg-gold/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cosmic-purple/5 rounded-full blur-3xl" />
+
       <div className="container relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -66,25 +70,44 @@ const TestimonialsSection = () => {
           {testimonials.map((t, i) => (
             <motion.div
               key={t.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, rotateX: -10 }}
+              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: (i % 3) * 0.1 }}
-              className="glass rounded-2xl p-7 relative hover:border-gold/40 transition-colors"
+              transition={{ delay: (i % 3) * 0.15, duration: 0.5 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="glass rounded-2xl p-7 relative hover:border-gold/40 transition-all group"
             >
-              <Quote className="absolute top-5 right-5 h-10 w-10 text-gold/15" />
+              {/* Animated glow on hover */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-gold/20 via-transparent to-cosmic-purple/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              <Quote className="absolute top-5 right-5 h-10 w-10 text-gold/15 group-hover:text-gold/30 transition-colors" />
+
+              {/* Animated stars */}
               <div className="flex gap-0.5 mb-4">
                 {Array.from({ length: t.rating }).map((_, j) => (
-                  <Star key={j} className="h-4 w-4 fill-gold text-gold" />
+                  <motion.div
+                    key={j}
+                    initial={{ scale: 0, rotate: -180 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: (i % 3) * 0.15 + j * 0.1 }}
+                  >
+                    <Star className="h-4 w-4 fill-gold text-gold" />
+                  </motion.div>
                 ))}
               </div>
+
               <p className="text-cosmic-silver/85 leading-relaxed mb-6 font-serif text-lg italic">
                 "{t.text}"
               </p>
+
               <div className="flex items-center gap-3 pt-4 border-t border-gold/10">
-                <div className="h-11 w-11 rounded-full bg-gradient-gold flex items-center justify-center font-display font-bold text-primary-foreground">
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="h-11 w-11 rounded-full bg-gradient-gold flex items-center justify-center font-display font-bold text-primary-foreground shadow-lg"
+                >
                   {t.name[0]}
-                </div>
+                </motion.div>
                 <div>
                   <div className="font-semibold text-foreground">{t.name}</div>
                   <div className="text-xs text-cosmic-silver/60">{t.location}</div>

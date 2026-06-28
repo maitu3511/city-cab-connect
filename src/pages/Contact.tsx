@@ -31,8 +31,8 @@ const Contact = () => {
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-3">
             {[
-              { Icon: Phone, label: "Call", value: "+91 84601 07287", href: `tel:${PHONE_NUMBER}` },
-              { Icon: MessageCircle, label: "WhatsApp", value: "+91 84601 07287", href: `https://wa.me/${WHATSAPP_NUMBER}` },
+              { Icon: Phone, label: "Call", value: PHONE_NUMBER, href: `tel:${PHONE_NUMBER}` },
+              { Icon: MessageCircle, label: "WhatsApp", value: PHONE_NUMBER, href: `https://wa.me/${WHATSAPP_NUMBER}` },
               { Icon: Mail, label: "Email", value: EMAIL, href: `mailto:${EMAIL}` },
               { Icon: MapPin, label: "Location", value: "Ahmedabad, Gujarat, India" },
             ].map(({ Icon, label, value, href }, i) => (
