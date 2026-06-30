@@ -4,8 +4,8 @@ import { X, ShieldCheck, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { WHATSAPP_NUMBER, PHONE_NUMBER } from "@/lib/whatsapp";
 
-const POPUP_SHOWN_KEY = "awh-popup-shown";
-const POPUP_DELAY = 30000; // 30 seconds
+const POPUP_SHOWN_KEY = "awh-popup-shown-v2";
+const POPUP_DELAY = 15000; // 15 seconds
 
 const GuaranteePopup = () => {
   const [show, setShow] = useState(false);
@@ -27,7 +27,7 @@ const GuaranteePopup = () => {
   const handleCTA = () => {
     window.open(
       `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-        "Namaste! I'm interested in learning more about the 6 Months Money Back Guarantee. Please share the details."
+        "Namaste! I'm interested in learning more about the 100% Money Back Guarantee (6 Months). Please share the details."
       )}`,
       "_blank"
     );
@@ -103,7 +103,7 @@ const GuaranteePopup = () => {
                   transition={{ delay: 0.4 }}
                   className="font-display text-2xl sm:text-3xl font-bold text-gradient-gold mb-4"
                 >
-                  100% Money Back Guarantee
+                  6 Month 100% Money Back Guarantee
                 </motion.h3>
 
                 {/* Description */}
@@ -114,7 +114,7 @@ const GuaranteePopup = () => {
                   className="text-cosmic-silver/80 leading-relaxed mb-6"
                 >
                   We stand behind our proven methods with absolute confidence. If you're not completely
-                  satisfied within 6 months, we offer a full refund — no questions asked.*
+                  satisfied within 6 months, we offer a 100% full refund — no questions asked.*
                 </motion.p>
 
                 {/* Disclaimer */}
