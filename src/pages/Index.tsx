@@ -13,11 +13,33 @@ import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import SplashLoader from "@/components/SplashLoader";
 import GuaranteePopup from "@/components/GuaranteePopup";
 import MoneyBackGuaranteeSection from "@/components/MoneyBackGuaranteeSection";
-import LeadCapturePopup from "@/components/LeadCapturePopup";
 import SEO from "@/components/SEO";
+import { useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
+
+  // Track visitor automatically
+  useEffect(() => {
+    const trackVisitor = async () => {
+      const TRACK_KEY = "awh-visitor-tracked";
+      if (localStorage.getItem(TRACK_KEY)) return;
+
+      try {
+        await supabase.from("visitor_leads").insert({
+          full_name: "Website Visitor",
+          mobile_number: new Date().toISOString().slice(0, 10),
+          city: navigator.language || "Unknown",
+          interested_service: "Homepage Visit",
+        });
+        localStorage.setItem(TRACK_KEY, "true");
+      } catch {
+        // Silent fail
+      }
+    };
+    if (!loading) trackVisitor();
+  }, [loading]);
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
@@ -44,7 +66,6 @@ const Index = () => {
             <FloatingWhatsApp />
           </div>
           <GuaranteePopup />
-          <LeadCapturePopup />
         </>
       )}
     </div>

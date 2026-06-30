@@ -71,23 +71,10 @@ const AppointmentsTab = () => {
 
 const LeadsTab = () => {
   const [list, reload] = useList("visitor_leads");
-  const [search, setSearch] = useState("");
-  const [serviceFilter, setServiceFilter] = useState("");
-  const [cityFilter, setCityFilter] = useState("");
-
-  const filteredList = list.filter((lead) => {
-    const matchesSearch = !search ||
-      lead.full_name?.toLowerCase().includes(search.toLowerCase()) ||
-      lead.mobile_number?.includes(search) ||
-      lead.email?.toLowerCase().includes(search.toLowerCase());
-    const matchesService = !serviceFilter || lead.interested_service === serviceFilter;
-    const matchesCity = !cityFilter || lead.city?.toLowerCase().includes(cityFilter.toLowerCase());
-    return matchesSearch && matchesService && matchesCity;
-  });
 
   const exportCSV = () => {
-    const headers = ["Name", "Mobile", "Email", "City", "Service", "Created At"];
-    const rows = filteredList.map((l) => [
+    const headers = ["Name", "Mobile/Date", "Email", "City", "Service", "Created At"];
+    const rows = list.map((l) => [
       l.full_name,
       l.mobile_number,
       l.email || "",
@@ -100,67 +87,57 @@ const LeadsTab = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `leads_${new Date().toISOString().split("T")[0]}.csv`;
+    a.download = `visitors_${new Date().toISOString().split("T")[0]}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   };
 
-  const services = [...new Set(list.map((l) => l.interested_service).filter(Boolean))];
-  const cities = [...new Set(list.map((l) => l.city).filter(Boolean))];
+  // Count unique dates for visitor stats
+  const todayVisitors = list.filter(l => new Date(l.created_at).toDateString() === new Date().toDateString()).length;
+  const thisWeekVisitors = list.filter(l => {
+    const d = new Date(l.created_at);
+    const weekAgo = new Date(); weekAgo.setDate(weekAgo.getDate() - 7);
+    return d >= weekAgo;
+  }).length;
 
   return (
     <div className="mt-6">
       <div className="glass-gold rounded-2xl p-4 mb-4">
-        <div className="flex flex-wrap gap-3 items-center">
-          <Input
-            placeholder="Search name, mobile, email..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 min-w-[200px] bg-background/40 border-gold/20"
-          />
-          <select
-            value={serviceFilter}
-            onChange={(e) => setServiceFilter(e.target.value)}
-            className="bg-background/60 border border-gold/30 rounded px-3 py-2 text-sm"
-          >
-            <option value="">All Services</option>
-            {services.map((s) => <option key={s} value={s}>{s}</option>)}
-          </select>
-          <Input
-            placeholder="Filter city..."
-            value={cityFilter}
-            onChange={(e) => setCityFilter(e.target.value)}
-            className="w-40 bg-background/40 border-gold/20"
-          />
-          <Button onClick={exportCSV} variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
+        <div className="flex flex-wrap gap-4 items-center justify-between">
+          <div className="flex gap-6">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-gold">{list.length}</div>
+              <div className="text-xs text-cosmic-silver/60">Total Visitors</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-gold">{todayVisitors}</div>
+              <div className="text-xs text-cosmic-silver/60">Today</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-gold">{thisWeekVisitors}</div>
+              <div className="text-xs text-cosmic-silver/60">This Week</div>
+            </div>
+          </div>
+          <Button onClick={exportCSV} className="bg-gradient-gold text-primary-foreground">
             <Download className="h-4 w-4 mr-2" /> Export CSV
           </Button>
         </div>
       </div>
 
-      <div className="text-sm text-cosmic-silver/70 mb-3">
-        Showing {filteredList.length} of {list.length} leads
-      </div>
-
-      <div className="space-y-3">
-        {filteredList.map((lead) => (
-          <div key={lead.id} className="glass-gold rounded-2xl p-4 flex justify-between items-start">
+      <div className="space-y-2">
+        {list.map((lead) => (
+          <div key={lead.id} className="glass-gold rounded-xl p-3 flex justify-between items-center">
             <div>
-              <div className="font-display text-gold">{lead.full_name}</div>
-              <div className="text-xs text-cosmic-silver/70">{lead.mobile_number}</div>
-              {lead.email && <div className="text-xs text-cosmic-silver/60">{lead.email}</div>}
-              <div className="flex gap-2 mt-1">
-                {lead.city && <span className="text-xs bg-gold/10 text-gold/80 px-2 py-0.5 rounded">{lead.city}</span>}
-                {lead.interested_service && <span className="text-xs bg-cosmic-purple/10 text-cosmic-purple/80 px-2 py-0.5 rounded">{lead.interested_service}</span>}
-              </div>
+              <div className="text-sm font-semibold">{lead.full_name}</div>
+              <div className="text-xs text-cosmic-silver/60">{lead.interested_service} • {lead.city}</div>
             </div>
             <div className="text-xs text-cosmic-silver/60">
-              {new Date(lead.created_at).toLocaleDateString()}
+              {new Date(lead.created_at).toLocaleString()}
             </div>
           </div>
         ))}
-        {filteredList.length === 0 && (
-          <div className="text-center text-cosmic-silver/60 py-8">No leads found</div>
+        {list.length === 0 && (
+          <div className="text-center text-cosmic-silver/60 py-8">No visitors yet</div>
         )}
       </div>
     </div>
