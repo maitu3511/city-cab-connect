@@ -12,6 +12,8 @@ import TrustSection from "@/components/TrustSection";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import SplashLoader from "@/components/SplashLoader";
 import GuaranteePopup from "@/components/GuaranteePopup";
+import MoneyBackGuaranteeSection from "@/components/MoneyBackGuaranteeSection";
+import LeadCapturePopup from "@/components/LeadCapturePopup";
 import SEO from "@/components/SEO";
 
 const Index = () => {
@@ -34,6 +36,7 @@ const Index = () => {
               <StatsStrip />
               <ServicesSection />
               <TrustSection />
+              <MoneyBackGuaranteeSection />
               <TestimonialsSection />
               <BookingSection />
             </main>
@@ -41,6 +44,7 @@ const Index = () => {
             <FloatingWhatsApp />
           </div>
           <GuaranteePopup />
+          <LeadCapturePopup />
         </>
       )}
     </div>

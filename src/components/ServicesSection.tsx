@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
-import { ScrollText, Heart, Users, Briefcase, TrendingUp, Hash, Hop as Home, Gem, Sparkles, Compass, MessageCircle, ArrowRight, Phone } from "lucide-react";
+import { ScrollText, Heart, Users, Briefcase, TrendingUp, Hash, Hop as Home, Gem, Sparkles, Compass, MessageCircle, ArrowRight, Phone, UserCheck, HeartHandshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const WHATSAPP_NUMBER = "919558565655";
 
 const services = [
   { icon: ScrollText, title: "Astrology", desc: "In-depth birth chart analysis revealing your life's blueprint, planetary influences & cosmic purpose.", benefits: ["Kundli analysis", "Planetary predictions", "Remedial guidance"] },
+  { icon: HeartHandshake, title: "Kundli Matching", desc: "Comprehensive marriage compatibility analysis using traditional Guna Milan and modern insights.", benefits: ["Marriage compatibility", "Guna Milan analysis", "Manglik check", "Dosha analysis", "Relationship guidance"] },
   { icon: Hash, title: "Numerology", desc: "Unlock the power of numbers in your life through name and birth date analysis.", benefits: ["Life path number", "Name correction", "Lucky numbers"] },
   { icon: Phone, title: "Mobile Number Numerology", desc: "Discover how your mobile number influences your energy and success.", benefits: ["Number analysis", "Lucky mobile number", "Energy alignment"] },
   { icon: Users, title: "Name Numerology", desc: "Get the perfect name spelling for success, prosperity and happiness.", benefits: ["Name correction", "Spelling optimization", "Signature analysis"] },

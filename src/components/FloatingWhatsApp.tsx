@@ -5,7 +5,7 @@ const WHATSAPP_NUMBER = "919558565655";
 const FloatingWhatsApp = () => (
   <a
     href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-      "Namaste Hrishi ji, I'd like to know more about your consultations."
+      "Namaste! I need guidance. Can you please help me?"
     )}`}
     target="_blank"
     rel="noopener noreferrer"
@@ -15,7 +15,7 @@ const FloatingWhatsApp = () => (
     <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-25" />
     <span className="relative flex items-center gap-2 bg-[#25D366] text-white px-5 py-3.5 rounded-full shadow-2xl hover:scale-110 transition-transform font-semibold">
       <MessageCircle className="h-5 w-5" />
-      <span className="hidden sm:inline">Chat with Hrishi</span>
+      <span className="hidden sm:inline">Need Guidance? Chat with an Astrologer</span>
     </span>
   </a>
 );

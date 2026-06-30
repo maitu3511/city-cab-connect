@@ -103,7 +103,7 @@ const GuaranteePopup = () => {
                   transition={{ delay: 0.4 }}
                   className="font-display text-2xl sm:text-3xl font-bold text-gradient-gold mb-4"
                 >
-                  6 Months Money Back Guarantee
+                  100% Money Back Guarantee
                 </motion.h3>
 
                 {/* Description */}
@@ -113,8 +113,8 @@ const GuaranteePopup = () => {
                   transition={{ delay: 0.5 }}
                   className="text-cosmic-silver/80 leading-relaxed mb-6"
                 >
-                  We're confident in our proven methods. If you're not satisfied with your consultation
-                  within 6 months, we offer a full refund.*
+                  We stand behind our proven methods with absolute confidence. If you're not completely
+                  satisfied within 6 months, we offer a full refund — no questions asked.*
                 </motion.p>
 
                 {/* Disclaimer */}
