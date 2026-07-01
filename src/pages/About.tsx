@@ -22,7 +22,7 @@ const About = () => (
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-16">
         {[
-          { Icon: Star, label: "500+ Consultations" },
+          { Icon: Star, label: "4000+ Consultations" },
           { Icon: Heart, label: "Satisfied Clients" },
           { Icon: Award, label: "Certified Expert" },
           { Icon: Sparkles, label: "100% Confidential" },
