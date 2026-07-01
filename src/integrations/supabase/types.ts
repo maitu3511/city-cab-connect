@@ -356,39 +356,6 @@ export type Database = {
         }
         Relationships: []
       }
-      visitor_leads: {
-        Row: {
-          id: string
-          full_name: string
-          mobile_number: string
-          email: string | null
-          city: string | null
-          interested_service: string | null
-          created_at: string
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          full_name: string
-          mobile_number: string
-          email?: string | null
-          city?: string | null
-          interested_service?: string | null
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          full_name?: string
-          mobile_number?: string
-          email?: string | null
-          city?: string | null
-          interested_service?: string | null
-          created_at?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
     }
     Views: {
       [_ in never]: never
