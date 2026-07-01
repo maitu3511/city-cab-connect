@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import CountUp from "./CountUp";
 
 const stats = [
-  { end: 15, suffix: "+", label: "Years of Practice" },
-  { end: 10000, suffix: "+", label: "Lives Guided" },
+  { end: 3, suffix: "+", label: "Years of Practice" },
+  { end: 4000, suffix: "+", label: "Consultations" },
   { end: 98, suffix: "%", label: "Satisfaction" },
   { end: 4.9, suffix: "★", label: "Average Rating" },
 ];
