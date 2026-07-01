@@ -120,7 +120,7 @@ const CosmicHero = () => {
             className="mt-14 grid grid-cols-3 gap-6 max-w-xl"
           >
             {[
-              { num: "500+", label: "Consultations" },
+              { num: "4000+", label: "Consultations" },
               { num: "98%", label: "Satisfaction" },
               { num: "4.9★", label: "Rating" },
             ].map((s) => (
