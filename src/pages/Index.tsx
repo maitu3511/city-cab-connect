@@ -14,7 +14,6 @@ import SplashLoader from "@/components/SplashLoader";
 import GuaranteePopup from "@/components/GuaranteePopup";
 import MoneyBackGuaranteeSection from "@/components/MoneyBackGuaranteeSection";
 import SEO from "@/components/SEO";
-import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -23,24 +22,6 @@ const Index = () => {
   useEffect(() => {
     const t = setTimeout(() => setShowSplash(false), 3000);
     return () => clearTimeout(t);
-  }, []);
-
-  useEffect(() => {
-    const TRACK_KEY = "awh-visitor-tracked";
-    if (localStorage.getItem(TRACK_KEY)) return;
-    (async () => {
-      try {
-        await supabase.from("visitor_leads").insert({
-          full_name: "Website Visitor",
-          mobile_number: new Date().toISOString().slice(0, 10),
-          city: navigator.language || "Unknown",
-          interested_service: "Homepage Visit",
-        });
-        localStorage.setItem(TRACK_KEY, "true");
-      } catch {
-        /* silent */
-      }
-    })();
   }, []);
 
   return (
