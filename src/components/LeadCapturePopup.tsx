@@ -43,7 +43,7 @@ const LeadCapturePopup = () => {
     }
 
     setSubmitting(true);
-    const { error } = await supabase.from("visitor_leads").insert({
+    const { error } = await (supabase as any).from("visitor_leads").insert({
       full_name: form.full_name,
       mobile_number: form.mobile_number,
       email: form.email || null,
