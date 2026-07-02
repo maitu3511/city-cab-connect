@@ -1,191 +1,197 @@
+import { useEffect, useMemo, useRef, useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
+import ShopHero from "@/components/shop/ShopHero";
+import ProductCard, { Product } from "@/components/shop/ProductCard";
+import QuickView from "@/components/shop/QuickView";
+import CartDrawer from "@/components/shop/CartDrawer";
+import TrustSection from "@/components/TrustSection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { waLink, WHATSAPP_NUMBER } from "@/lib/whatsapp";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { supabase } from "@/integrations/supabase/client";
+import { useCart } from "@/lib/cart";
 import { motion } from "framer-motion";
-import { useState } from "react";
 import {
-  Sparkles, Gem, BookOpen, Flame, ScrollText, FileText, Package,
-  Bell, MessageCircle, Mail, Clock,
+  Search, ShoppingBag, Gem, Sparkles, Flame, Circle, Star, Home,
+  BookOpen, Wind, Package, Heart, ScrollText, SlidersHorizontal,
 } from "lucide-react";
-import { toast } from "sonner";
-
-const ZODIAC = ["♈","♉","♊","♋","♌","♍","♎","♏","♐","♑","♒","♓"];
+import { cn } from "@/lib/utils";
 
 const CATEGORIES = [
-  { icon: Sparkles, name: "Rudraksha Collection", desc: "Sacred beads for spiritual energy" },
-  { icon: Gem, name: "Gemstones", desc: "Certified planetary gemstones" },
-  { icon: ScrollText, name: "Yantras", desc: "Powerful sacred geometry" },
-  { icon: BookOpen, name: "Astrology Books", desc: "Ancient wisdom in print" },
-  { icon: Flame, name: "Spiritual Products", desc: "Pooja essentials & more" },
-  { icon: FileText, name: "Digital Reports", desc: "Personalised PDF reports" },
-  { icon: Package, name: "Pooja Kits", desc: "Complete ritual kits" },
+  { name: "All", icon: Sparkles },
+  { name: "Gemstones", icon: Gem },
+  { name: "Rudraksha", icon: Circle },
+  { name: "Yantras", icon: ScrollText },
+  { name: "Crystals", icon: Sparkles },
+  { name: "Bracelets", icon: Star },
+  { name: "Pendants", icon: Heart },
+  { name: "Vastu Products", icon: Home },
+  { name: "Spiritual Kits", icon: Package },
+  { name: "Pooja Items", icon: Flame },
+  { name: "Incense", icon: Wind },
+  { name: "Books", icon: BookOpen },
+  { name: "Lucky Charms", icon: Star },
 ];
 
 const Shop = () => {
-  const [email, setEmail] = useState("");
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [activeCat, setActiveCat] = useState("All");
+  const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("popular");
+  const [quickView, setQuickView] = useState<Product | null>(null);
+  const [cartOpen, setCartOpen] = useState(false);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const cartCount = useCart((s) => s.count());
 
-  const notifyWhatsApp = () => {
-    window.open(
-      waLink("Namaste Hrishi ji, please notify me when the Astro Shop launches. 🙏"),
-      "_blank"
-    );
-  };
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase
+        .from("products")
+        .select("id,name,description,price,image_url,category,stock")
+        .eq("active", true)
+        .order("created_at", { ascending: false });
+      setProducts((data as Product[]) || []);
+      setLoading(false);
+    })();
+  }, []);
 
-  const notifyEmail = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
-    toast.success("You're on the list! We'll notify you at launch ✨");
-    setEmail("");
-  };
+  const filtered = useMemo(() => {
+    let list = products;
+    if (activeCat !== "All") list = list.filter((p) => p.category === activeCat);
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      list = list.filter((p) => p.name.toLowerCase().includes(q) || p.description?.toLowerCase().includes(q));
+    }
+    const sorted = [...list];
+    if (sort === "price-asc") sorted.sort((a, b) => a.price - b.price);
+    if (sort === "price-desc") sorted.sort((a, b) => b.price - a.price);
+    if (sort === "new") sorted.reverse();
+    return sorted;
+  }, [products, activeCat, search, sort]);
+
+  const scrollToGrid = () => gridRef.current?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <PageLayout>
       <SEO
-        title="Shop — Coming Soon · Astro With Hrishi"
-        description="A curated cosmic shop of Rudraksha, gemstones, yantras and spiritual products — launching soon."
+        title="Astro Spiritual Store · Rudraksha, Gemstones & Yantras"
+        description="Luxury astrology store — authentic rudraksha, gemstones, yantras, crystals, bracelets, pendants and pooja items. Lab certified & energised."
         path="/shop"
       />
 
-      <section className="relative min-h-[80vh] overflow-hidden pt-20">
-        {/* Floating zodiac glyphs */}
-        <div className="absolute inset-0 pointer-events-none">
-          {ZODIAC.map((g, i) => (
-            <motion.span
-              key={i}
-              className="absolute text-gold/20 font-display text-4xl sm:text-6xl select-none"
-              style={{
-                left: `${(i * 83) % 95}%`,
-                top: `${(i * 47) % 85}%`,
-              }}
-              animate={{ y: [0, -20, 0], rotate: [0, 8, 0], opacity: [0.15, 0.35, 0.15] }}
-              transition={{ duration: 6 + i, repeat: Infinity, ease: "easeInOut" }}
-            >
-              {g}
-            </motion.span>
-          ))}
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-gold/10 blur-[120px]" />
-          <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-cosmic-purple/20 blur-[100px]" />
-        </div>
+      <ShopHero onShopNow={scrollToGrid} />
 
-        <div className="container relative z-10 py-12">
-          {/* Hero */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-gold mb-6">
-              <Clock className="h-3.5 w-3.5 text-gold animate-pulse" />
-              <span className="text-xs tracking-[0.25em] uppercase text-gold">Launching Soon</span>
-            </div>
-
-            <h1 className="font-display text-5xl sm:text-7xl font-bold leading-tight mb-6">
-              The <span className="text-gradient-gold">Cosmic Shop</span>
-              <br />
-              <span className="font-serif italic text-3xl sm:text-5xl text-cosmic-silver/85 font-normal">
-                is arriving
-              </span>
-            </h1>
-
-            <p className="text-base sm:text-lg text-cosmic-silver/80 leading-relaxed mb-10">
-              A curated collection of sacred Rudraksha, certified gemstones, powerful yantras and
-              authentic spiritual essentials — handpicked by Astro Hrishi. Be the first to know.
-            </p>
-
-            {/* Notify form */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3 }}
-              className="glass-gold rounded-3xl p-6 sm:p-8 max-w-xl mx-auto"
-            >
-              <div className="flex items-center justify-center gap-2 mb-4 text-gold">
-                <Bell className="h-4 w-4" />
-                <span className="text-xs uppercase tracking-[0.25em]">Notify Me at Launch</span>
-              </div>
-              <form onSubmit={notifyEmail} className="flex flex-col sm:flex-row gap-3">
-                <Input
-                  type="email"
-                  required
-                  placeholder="your@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="bg-background/60 border-gold/30 focus:border-gold"
-                />
-                <Button
-                  type="submit"
-                  className="bg-gradient-gold text-primary-foreground font-semibold glow-gold"
-                >
-                  <Mail className="mr-2 h-4 w-4" />
-                  Notify Me
-                </Button>
-              </form>
-              <div className="my-4 flex items-center gap-3 text-xs text-cosmic-silver/50">
-                <div className="flex-1 h-px bg-gold/20" />
-                or
-                <div className="flex-1 h-px bg-gold/20" />
-              </div>
-              <Button
-                onClick={notifyWhatsApp}
-                variant="outline"
-                className="w-full border-gold/40 text-gold hover:bg-gold/10"
-              >
-                <MessageCircle className="mr-2 h-4 w-4" />
-                Get WhatsApp Updates
-              </Button>
-            </motion.div>
-          </motion.div>
-
-          {/* Upcoming categories */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="mt-24"
-          >
-            <div className="text-center mb-12">
-              <div className="text-xs uppercase tracking-[0.3em] text-gold mb-3">
-                A glimpse of what's coming
-              </div>
-              <h2 className="font-display text-3xl sm:text-4xl font-bold text-gradient-gold">
-                Sacred Collections
-              </h2>
-            </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-              {CATEGORIES.map((c, i) => (
-                <motion.div
+      {/* Category rail */}
+      <section className="container relative z-10 -mt-4 mb-10">
+        <div className="glass-gold rounded-2xl p-3 sm:p-4 overflow-x-auto">
+          <div className="flex gap-2 min-w-max">
+            {CATEGORIES.map((c) => {
+              const active = activeCat === c.name;
+              return (
+                <motion.button
                   key={c.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  className="relative glass-gold rounded-2xl p-6 group overflow-hidden"
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.96 }}
+                  onClick={() => setActiveCat(c.name)}
+                  className={cn(
+                    "flex flex-col items-center gap-1.5 px-4 py-3 rounded-xl min-w-[92px] transition-all border",
+                    active
+                      ? "bg-gradient-gold text-primary-foreground border-gold glow-gold"
+                      : "bg-background/40 border-gold/20 text-cosmic-silver hover:border-gold/50 hover:bg-gold/5"
+                  )}
                 >
-                  <div className="absolute -top-10 -right-10 w-32 h-32 bg-gold/10 rounded-full blur-2xl group-hover:bg-gold/25 transition-all" />
-                  <div className="relative">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-gold flex items-center justify-center mb-4 glow-gold">
-                      <c.icon className="h-6 w-6 text-primary-foreground" />
-                    </div>
-                    <h3 className="font-display text-lg font-semibold text-gold mb-1">
-                      {c.name}
-                    </h3>
-                    <p className="text-sm text-cosmic-silver/70">{c.desc}</p>
-                    <div className="mt-4 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-gold/70">
-                      <Clock className="h-3 w-3" /> Coming soon
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+                  <c.icon className="h-5 w-5" />
+                  <span className="text-[11px] font-semibold uppercase tracking-wider whitespace-nowrap">{c.name}</span>
+                </motion.button>
+              );
+            })}
+          </div>
         </div>
       </section>
+
+      {/* Search + Sort bar */}
+      <section ref={gridRef} className="container mb-6">
+        <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gold" />
+            <Input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search sacred products…"
+              className="pl-10 bg-background/60 border-gold/30 focus:border-gold h-11"
+            />
+          </div>
+          <div className="flex items-center gap-2">
+            <SlidersHorizontal className="h-4 w-4 text-gold" />
+            <Select value={sort} onValueChange={setSort}>
+              <SelectTrigger className="w-[190px] h-11 bg-background/60 border-gold/30">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="popular">Popular</SelectItem>
+                <SelectItem value="new">Newest</SelectItem>
+                <SelectItem value="price-asc">Price: Low to High</SelectItem>
+                <SelectItem value="price-desc">Price: High to Low</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        <div className="text-xs text-cosmic-silver/60 mt-3">
+          Showing <span className="text-gold font-semibold">{filtered.length}</span> of {products.length} products
+          {activeCat !== "All" && <> in <span className="text-gold">{activeCat}</span></>}
+        </div>
+      </section>
+
+      {/* Grid */}
+      <section className="container">
+        {loading ? (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="aspect-[3/4] rounded-2xl bg-gold/5 animate-pulse" />
+            ))}
+          </div>
+        ) : filtered.length === 0 ? (
+          <div className="text-center py-20">
+            <div className="text-cosmic-silver/60 mb-2">No products found</div>
+            <Button variant="outline" onClick={() => { setActiveCat("All"); setSearch(""); }} className="border-gold/40 text-gold">
+              Clear filters
+            </Button>
+          </div>
+        ) : (
+          <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            {filtered.map((p) => (
+              <ProductCard key={p.id} product={p} onQuickView={setQuickView} />
+            ))}
+          </motion.div>
+        )}
+      </section>
+
+      <div className="mt-20">
+        <TrustSection />
+      </div>
+
+      <QuickView product={quickView} open={!!quickView} onOpenChange={(o) => !o && setQuickView(null)} />
+      <CartDrawer open={cartOpen} onOpenChange={setCartOpen} />
+
+      {/* Floating cart button */}
+      <motion.button
+        onClick={() => setCartOpen(true)}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.95 }}
+        className="fixed bottom-24 right-6 z-40 h-14 w-14 rounded-full bg-gradient-gold text-primary-foreground shadow-[0_0_40px_hsl(43_78%_58%/0.5)] flex items-center justify-center"
+        aria-label="Open cart"
+      >
+        <ShoppingBag className="h-6 w-6" />
+        {cartCount > 0 && (
+          <span className="absolute -top-1 -right-1 h-6 w-6 rounded-full bg-destructive text-white text-xs font-bold flex items-center justify-center border-2 border-background">
+            {cartCount}
+          </span>
+        )}
+      </motion.button>
     </PageLayout>
   );
 };
