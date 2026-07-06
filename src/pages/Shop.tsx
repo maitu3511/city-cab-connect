@@ -5,6 +5,7 @@ import ShopHero from "@/components/shop/ShopHero";
 import ProductCard, { Product } from "@/components/shop/ProductCard";
 import QuickView from "@/components/shop/QuickView";
 import CartDrawer from "@/components/shop/CartDrawer";
+import ProductReviews from "@/components/shop/ProductReviews";
 import TrustSection from "@/components/TrustSection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -34,6 +35,63 @@ const CATEGORIES = [
   { name: "Lucky Charms", icon: Star },
 ];
 
+const FALLBACK_PRODUCTS: Product[] = [
+  {
+    id: "fallback-rudraksha-7-mukhi",
+    name: "7 Mukhi Rudraksha Bracelet",
+    description: "Certified, energised Rudraksha bracelet for prosperity, focus and spiritual protection.",
+    price: 2499,
+    image_url: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&q=80",
+    category: "Rudraksha",
+    stock: 25,
+  },
+  {
+    id: "fallback-yellow-sapphire",
+    name: "Natural Yellow Sapphire",
+    description: "Premium Pukhraj gemstone selected for Jupiter strength, wisdom and abundance.",
+    price: 8999,
+    image_url: "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=800&q=80",
+    category: "Gemstones",
+    stock: 12,
+  },
+  {
+    id: "fallback-sri-yantra",
+    name: "Sri Yantra Copper Energised",
+    description: "Sacred yantra for wealth, vastu balance and divine positive energy at home or office.",
+    price: 1799,
+    image_url: "https://images.unsplash.com/photo-1585951237318-9ea5e175b891?w=800&q=80",
+    category: "Yantras",
+    stock: 30,
+  },
+  {
+    id: "fallback-chakra-bracelet",
+    name: "7 Chakra Healing Bracelet",
+    description: "Natural crystal bracelet for aura balancing, meditation and everyday cosmic alignment.",
+    price: 799,
+    image_url: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=800&q=80",
+    category: "Bracelets",
+    stock: 80,
+  },
+  {
+    id: "fallback-vastu-pyramid",
+    name: "Vastu Pyramid Energy Set",
+    description: "Premium vastu remedy set for home, office, shop and business energy correction.",
+    price: 1199,
+    image_url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80",
+    category: "Vastu Products",
+    stock: 45,
+  },
+  {
+    id: "fallback-meditation-kit",
+    name: "Meditation Essentials Kit",
+    description: "Curated spiritual kit with meditation essentials for peace, rituals and daily sadhana.",
+    price: 1699,
+    image_url: "https://images.unsplash.com/photo-1545389336-cf090694435e?w=800&q=80",
+    category: "Spiritual Kits",
+    stock: 18,
+  },
+];
+
 const Shop = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -47,12 +105,12 @@ const Shop = () => {
 
   useEffect(() => {
     (async () => {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from("products")
         .select("id,name,description,price,image_url,category,stock")
         .eq("active", true)
         .order("created_at", { ascending: false });
-      setProducts((data as Product[]) || []);
+      setProducts(!error && data?.length ? (data as Product[]) : FALLBACK_PRODUCTS);
       setLoading(false);
     })();
   }, []);
@@ -168,7 +226,9 @@ const Shop = () => {
         )}
       </section>
 
-      <div className="mt-20">
+      <ProductReviews />
+
+      <div className="mt-4">
         <TrustSection />
       </div>
 
