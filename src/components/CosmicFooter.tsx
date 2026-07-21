@@ -22,12 +22,9 @@ const CosmicFooter = () => {
       <div className="container relative z-10">
         <div className="grid md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <img src={logo} alt="Astro With Hrishi" className="h-12 w-12 object-contain drop-shadow-[0_0_12px_rgba(212,175,55,0.5)]" />
-              <div>
-                <div className="font-display text-xl text-gradient-gold font-bold">Astro With Hrishi</div>
-                <div className="text-[10px] tracking-[0.3em] text-cosmic-silver/70 uppercase">{t("home.tagline")}</div>
-              </div>
+            <div className="mb-5">
+              <img src={logo} alt="Astro With Hrishi" className="h-20 w-auto object-contain drop-shadow-[0_0_16px_rgba(212,175,55,0.55)]" />
+              <div className="text-[10px] tracking-[0.3em] text-cosmic-silver/70 uppercase mt-2">{t("home.tagline")}</div>
             </div>
             <p className="text-cosmic-silver/70 leading-relaxed mb-6 text-sm">
               Premium Vedic astrology consultations crafted with classical precision and modern clarity.
