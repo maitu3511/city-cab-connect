@@ -35,14 +35,13 @@ const CosmicNavbar = () => {
   return (
     <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "py-2 glass border-b border-gold/20" : "py-3 bg-background/30 backdrop-blur-sm"}`}>
       <div className="container flex items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-2 group flex-shrink-0">
+        <Link to="/" className="flex items-center gap-3 group flex-shrink-0" aria-label="Astro With Hrishi">
           <div className="relative">
-            <img src={logo} alt="Astro With Hrishi" className="h-11 w-11 object-contain drop-shadow-[0_0_12px_rgba(212,175,55,0.5)] transition-transform group-hover:scale-105" />
-            <div className="absolute inset-0 bg-gold/20 blur-xl group-hover:bg-gold/40 transition-all -z-10" />
+            <img src={logo} alt="Astro With Hrishi" className="h-12 sm:h-14 w-auto object-contain drop-shadow-[0_0_14px_rgba(212,175,55,0.55)] transition-transform group-hover:scale-105" />
+            <div className="absolute inset-0 bg-gold/20 blur-2xl group-hover:bg-gold/40 transition-all -z-10" />
           </div>
-          <div className="leading-tight">
-            <div className="font-display text-base sm:text-lg text-gradient-gold font-bold">Astro With Hrishi</div>
-            <div className="text-[9px] tracking-[0.25em] text-cosmic-silver/70 uppercase hidden sm:block">{t("home.tagline")}</div>
+          <div className="text-[9px] tracking-[0.25em] text-cosmic-silver/70 uppercase hidden md:block leading-tight">
+            {t("home.tagline")}
           </div>
         </Link>
 
