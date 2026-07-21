@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import StarField from "@/components/StarField";
 import CosmicNavbar from "@/components/CosmicNavbar";
 import CosmicHero from "@/components/CosmicHero";
@@ -10,20 +9,11 @@ import BookingSection from "@/components/BookingSection";
 import CosmicFooter from "@/components/CosmicFooter";
 import TrustSection from "@/components/TrustSection";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
-import SplashLoader from "@/components/SplashLoader";
 import GuaranteePopup from "@/components/GuaranteePopup";
 import MoneyBackGuaranteeSection from "@/components/MoneyBackGuaranteeSection";
 import SEO from "@/components/SEO";
 
 const Index = () => {
-  const [showSplash, setShowSplash] = useState(true);
-
-  // Hard safety: always dismiss splash after 3s no matter what
-  useEffect(() => {
-    const t = setTimeout(() => setShowSplash(false), 1200);
-    return () => clearTimeout(t);
-  }, []);
-
   return (
     <div className="relative min-h-screen overflow-x-hidden">
       <SEO
@@ -50,8 +40,6 @@ const Index = () => {
         <FloatingWhatsApp />
       </div>
       <GuaranteePopup />
-
-      {showSplash && <SplashLoader onLoadComplete={() => setShowSplash(false)} />}
     </div>
   );
 };

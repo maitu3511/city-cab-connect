@@ -117,18 +117,18 @@ const CosmicHero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
-            className="mt-14 grid grid-cols-3 gap-6 max-w-xl"
+            className="mt-14 grid grid-cols-3 gap-3 sm:gap-5 max-w-2xl"
           >
             {[
               { num: "4000+", label: "Consultations" },
-              { num: "98%", label: "Satisfaction" },
-              { num: "4.9★", label: "Rating" },
+              { num: "98%", label: "Satisfied Clients" },
+              { num: "100%", label: "Confidential" },
             ].map((s) => (
-              <div key={s.label} className="text-center">
-                <div className="font-display text-3xl sm:text-4xl text-gradient-gold font-bold">
+              <div key={s.label} className="text-center rounded-2xl border border-gold/20 bg-background/30 px-3 py-5 sm:px-5 sm:py-6 backdrop-blur-sm">
+                <div className="font-display text-3xl sm:text-5xl text-gradient-gold font-bold leading-none">
                   {s.num}
                 </div>
-                <div className="text-xs uppercase tracking-widest text-cosmic-silver/60 mt-1">
+                <div className="text-[10px] sm:text-xs uppercase tracking-widest text-cosmic-silver/70 mt-3 leading-relaxed">
                   {s.label}
                 </div>
               </div>
