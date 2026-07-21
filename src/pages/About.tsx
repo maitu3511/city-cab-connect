@@ -20,16 +20,16 @@ const About = () => (
         </motion.div>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-16">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
         {[
           { Icon: Star, label: "4000+ Consultations" },
           { Icon: Heart, label: "Satisfied Clients" },
           { Icon: Award, label: "Certified Expert" },
           { Icon: Sparkles, label: "100% Confidential" },
         ].map(({ Icon, label }, i) => (
-          <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="glass-gold rounded-2xl p-6 text-center">
-            <Icon className="h-8 w-8 text-gold mx-auto mb-3" />
-            <div className="text-sm text-cosmic-silver/85">{label}</div>
+          <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="glass-gold rounded-3xl p-8 sm:p-10 text-center min-h-[190px] flex flex-col items-center justify-center border border-gold/25 shadow-luxury">
+            <Icon className="h-11 w-11 sm:h-12 sm:w-12 text-gold mx-auto mb-5" />
+            <div className="font-display text-xl sm:text-2xl text-gradient-gold font-bold leading-tight">{label}</div>
           </motion.div>
         ))}
       </div>
