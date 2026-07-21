@@ -20,7 +20,7 @@ const Index = () => {
 
   // Hard safety: always dismiss splash after 3s no matter what
   useEffect(() => {
-    const t = setTimeout(() => setShowSplash(false), 3000);
+    const t = setTimeout(() => setShowSplash(false), 1200);
     return () => clearTimeout(t);
   }, []);
 
