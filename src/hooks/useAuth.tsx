@@ -14,15 +14,17 @@ export const useAuth = () => {
       setUser(sess?.user ?? null);
       if (sess?.user) {
         setTimeout(async () => {
-          const { data } = await supabase
-            .from("user_roles")
-            .select("role")
-            .eq("user_id", sess.user.id)
-            .eq("role", "admin")
-            .maybeSingle();
-          setIsAdmin(!!data);
+          try {
+            const { data } = await supabase
+              .from("user_roles")
+              .select("role")
+              .eq("user_id", sess.user.id)
+              .eq("role", "admin")
+              .maybeSingle();
+            setIsAdmin(!!data);
           } catch {
             setIsAdmin(false);
+          }
         }, 0);
       } else setIsAdmin(false);
     });
