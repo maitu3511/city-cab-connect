@@ -17,9 +17,8 @@ const FloatingWhatsApp = () => (
     aria-label="WhatsApp"
   >
     <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-25" />
-    <span className="relative flex items-center gap-2 bg-[#25D366] text-white px-5 py-3.5 rounded-full shadow-2xl hover:scale-110 transition-transform font-semibold">
+    <span className="relative flex items-center justify-center bg-[#25D366] text-white w-14 h-14 rounded-full shadow-2xl hover:scale-110 transition-transform">
       <WhatsAppIcon />
-      <span className="hidden sm:inline">Need Guidance? Chat with an Astrologer</span>
     </span>
   </a>
 );
