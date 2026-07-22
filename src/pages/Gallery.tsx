@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronLeft, ChevronRight, Instagram, ExternalLink, Sparkles } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Camera, ExternalLink, Sparkles } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
 
@@ -69,7 +69,7 @@ const InstagramFeed = () => (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-6">
       <div>
         <div className="inline-flex items-center gap-2 rounded-full glass-gold px-3 py-1.5 text-xs uppercase tracking-widest text-gold mb-3">
-          <Instagram className="h-4 w-4" /> Live Instagram Feed
+          <Camera className="h-4 w-4" /> Live Instagram Feed
         </div>
         <h2 className="font-display text-2xl sm:text-3xl text-gradient-gold">@astrowithhrishi_555</h2>
         <p className="text-sm text-cosmic-silver/70 mt-2">Daily astrology updates, remedies and spiritual moments.</p>
