@@ -21,15 +21,39 @@ export const useAuth = () => {
             .eq("role", "admin")
             .maybeSingle();
           setIsAdmin(!!data);
+          } catch {
+            setIsAdmin(false);
         }, 0);
       } else setIsAdmin(false);
     });
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-    return () => sub.subscription.unsubscribe();
+    let active = true;
+    const safetyTimer = window.setTimeout(() => {
+      if (active) setLoading(false);
+    }, 1200);
+
+    supabase.auth
+      .getSession()
+      .then(({ data: { session } }) => {
+        if (!active) return;
+        setSession(session);
+        setUser(session?.user ?? null);
+      })
+      .catch(() => {
+        if (!active) return;
+        setSession(null);
+        setUser(null);
+        setIsAdmin(false);
+      })
+      .finally(() => {
+        if (!active) return;
+        window.clearTimeout(safetyTimer);
+        setLoading(false);
+      });
+    return () => {
+      active = false;
+      window.clearTimeout(safetyTimer);
+      sub.subscription.unsubscribe();
+    };
   }, []);
 
   return { session, user, isAdmin, loading, signOut: () => supabase.auth.signOut() };

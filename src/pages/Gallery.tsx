@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Instagram, ExternalLink, Sparkles } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
-import { supabase } from "@/integrations/supabase/client";
 
 // 🖼️ Gallery images live in src/assets/gallery/
 // To change an image: just replace the file in that folder with the same name,
@@ -32,6 +31,7 @@ import spiritual4 from "@/assets/gallery/spiritual-4.jpg";
 import spiritual5 from "@/assets/gallery/spiritual-5.jpg";
 
 const cats = ["all", "zodiac", "cosmic", "numerology", "meditation", "spiritual"];
+const INSTAGRAM_URL = "https://www.instagram.com/astrowithhrishi_555?utm_source=qr";
 
 const defaultGallery = [
   { id: "z1", category: "zodiac", caption: "Zodiac Constellation Map", image_url: zodiac1 },
@@ -62,16 +62,62 @@ const defaultGallery = [
   { id: "s5", category: "spiritual", caption: "Incense & Rituals", image_url: spiritual5 },
 ];
 
+const instagramPreview = [...defaultGallery.slice(0, 8), ...defaultGallery.slice(0, 8)];
+
+const InstagramFeed = () => (
+  <section className="mb-12 overflow-hidden rounded-3xl border border-gold/20 bg-background/25 p-5 sm:p-7 backdrop-blur-sm shadow-luxury">
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-6">
+      <div>
+        <div className="inline-flex items-center gap-2 rounded-full glass-gold px-3 py-1.5 text-xs uppercase tracking-widest text-gold mb-3">
+          <Instagram className="h-4 w-4" /> Live Instagram Feed
+        </div>
+        <h2 className="font-display text-2xl sm:text-3xl text-gradient-gold">@astrowithhrishi_555</h2>
+        <p className="text-sm text-cosmic-silver/70 mt-2">Daily astrology updates, remedies and spiritual moments.</p>
+      </div>
+      <a
+        href={INSTAGRAM_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-gold px-5 py-3 text-sm font-semibold text-primary-foreground glow-gold hover:scale-105 transition-transform"
+      >
+        Open Instagram <ExternalLink className="h-4 w-4" />
+      </a>
+    </div>
+
+    <div className="relative -mx-5 sm:-mx-7">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent" />
+      <motion.div
+        className="flex gap-4 px-5 sm:px-7"
+        animate={{ x: [0, -1180] }}
+        transition={{ duration: 38, repeat: Infinity, ease: "linear" }}
+      >
+        {instagramPreview.map((item, index) => (
+          <a
+            key={`${item.id}-${index}`}
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative h-44 w-44 flex-none overflow-hidden rounded-2xl border border-gold/20 bg-card/50 sm:h-56 sm:w-56"
+            aria-label="Open Astro With Hrishi Instagram"
+          >
+            <img src={item.image_url} alt={item.caption} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent opacity-70" />
+            <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2 text-xs text-foreground">
+              <Sparkles className="h-3.5 w-3.5 text-gold" />
+              <span className="truncate">{item.caption}</span>
+            </div>
+          </a>
+        ))}
+      </motion.div>
+    </div>
+  </section>
+);
+
 const Gallery = () => {
   const [items, setItems] = useState<any[]>(defaultGallery);
   const [cat, setCat] = useState("all");
   const [active, setActive] = useState<number | null>(null);
-
-  useEffect(() => {
-    supabase.from("gallery_items").select("*").order("created_at", { ascending: false }).then(({ data }) => {
-      if (data && data.length > 0) setItems(data);
-    });
-  }, []);
 
   const filtered = cat === "all" ? items : items.filter((i) => i.category === cat);
 
@@ -90,6 +136,7 @@ const Gallery = () => {
     <PageLayout title="Gallery" subtitle="Moments of light, devotion and transformation.">
       <SEO title="Gallery — Astro With Hrishi" description="Photos from events, client experiences and spiritual moments with Astrologer Hrishi." path="/gallery" />
       <div className="container max-w-7xl">
+        <InstagramFeed />
         <div className="flex flex-wrap gap-2 justify-center mb-10">
           {cats.map((c) => (
             <button key={c} onClick={() => setCat(c)} className={`px-4 py-1.5 rounded-full text-xs uppercase tracking-wider transition ${cat === c ? "bg-gradient-gold text-primary-foreground" : "glass-gold text-cosmic-silver/80 hover:text-gold"}`}>{c}</button>
