@@ -10,18 +10,19 @@ const StarField = () => {
     if (!ctx) return;
 
     let raf = 0;
-    const dpr = window.devicePixelRatio || 1;
 
     const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
       canvas.style.width = window.innerWidth + "px";
       canvas.style.height = window.innerHeight + "px";
-      ctx.scale(dpr, dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     resize();
 
-    const stars = Array.from({ length: 180 }).map(() => ({
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const stars = Array.from({ length: prefersReducedMotion ? 60 : 120 }).map(() => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
       r: Math.random() * 1.4 + 0.2,
@@ -31,7 +32,9 @@ const StarField = () => {
     }));
 
     const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      ctx.clearRect(0, 0, width, height);
       stars.forEach((s) => {
         s.a += s.s;
         const alpha = (Math.sin(s.a) + 1) / 2;
@@ -42,7 +45,7 @@ const StarField = () => {
         ctx.shadowColor = `hsla(${s.hue}, 90%, 70%, ${alpha})`;
         ctx.fill();
       });
-      raf = requestAnimationFrame(draw);
+      if (!prefersReducedMotion) raf = requestAnimationFrame(draw);
     };
     draw();
 

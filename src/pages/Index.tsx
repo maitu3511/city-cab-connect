@@ -9,7 +9,6 @@ import BookingSection from "@/components/BookingSection";
 import CosmicFooter from "@/components/CosmicFooter";
 import TrustSection from "@/components/TrustSection";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
-import GuaranteePopup from "@/components/GuaranteePopup";
 import MoneyBackGuaranteeSection from "@/components/MoneyBackGuaranteeSection";
 import SEO from "@/components/SEO";
 
@@ -39,7 +38,6 @@ const Index = () => {
         <CosmicFooter />
         <FloatingWhatsApp />
       </div>
-      <GuaranteePopup />
     </div>
   );
 };
