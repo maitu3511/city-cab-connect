@@ -47,13 +47,13 @@ const StatsOverview = () => {
   useEffect(() => {
     (async () => {
       const { data: appts } = await supabase.from("appointments").select("id, created_at");
-      const { data: orders } = await supabase.from("orders").select("id, total_amount, status");
+      const { data: orders } = await supabase.from("orders").select("id, total, status");
       const today = new Date().toDateString();
       setStats({
         bookings: appts?.length ?? 0,
         todayBookings: (appts ?? []).filter((a: any) => new Date(a.created_at).toDateString() === today).length,
         orders: orders?.length ?? 0,
-        revenue: (orders ?? []).reduce((s: number, o: any) => s + Number(o.total_amount || 0), 0),
+        revenue: (orders ?? []).reduce((s: number, o: any) => s + Number(o.total || 0), 0),
       });
     })();
   }, []);
@@ -84,11 +84,11 @@ const OrdersTab = () => {
         <div key={o.id} className="glass-gold rounded-2xl p-4">
           <div className="flex justify-between">
             <div>
-              <div className="font-display text-gold">{o.customer_name || o.full_name || "Customer"}</div>
-              <div className="text-xs text-cosmic-silver/70">{o.phone} • {o.email}</div>
+              <div className="font-display text-gold">{o.customer_name || "Customer"}</div>
+              <div className="text-xs text-cosmic-silver/70">{o.customer_phone} • {o.customer_email}</div>
             </div>
             <div className="text-right">
-              <div className="text-gold font-semibold">₹{Number(o.total_amount || 0).toLocaleString("en-IN")}</div>
+              <div className="text-gold font-semibold">₹{Number(o.total || 0).toLocaleString("en-IN")}</div>
               <div className="text-xs text-cosmic-silver/60">{new Date(o.created_at).toLocaleString()}</div>
             </div>
           </div>
