@@ -19,13 +19,16 @@ const Admin = () => {
   return (
     <PageLayout title="Admin Dashboard">
       <div className="container max-w-6xl">
-        <Tabs defaultValue="appointments" className="w-full">
+        <StatsOverview />
+        <Tabs defaultValue="appointments" className="w-full mt-6">
           <TabsList className="glass-gold flex-wrap h-auto justify-start">
-            {["appointments", "leads", "blog", "gallery", "videos", "testimonials", "messages", "customers"].map((t) => (
+            {["appointments", "shop", "orders", "leads", "blog", "gallery", "videos", "testimonials", "messages", "customers"].map((t) => (
               <TabsTrigger key={t} value={t} className="capitalize data-[state=active]:bg-gradient-gold data-[state=active]:text-primary-foreground">{t}</TabsTrigger>
             ))}
           </TabsList>
           <TabsContent value="appointments"><AppointmentsTab /></TabsContent>
+          <TabsContent value="shop"><ProductsTab /></TabsContent>
+          <TabsContent value="orders"><OrdersTab /></TabsContent>
           <TabsContent value="leads"><LeadsTab /></TabsContent>
           <TabsContent value="blog"><BlogTab /></TabsContent>
           <TabsContent value="gallery"><GalleryTab /></TabsContent>
@@ -36,6 +39,65 @@ const Admin = () => {
         </Tabs>
       </div>
     </PageLayout>
+  );
+};
+
+const StatsOverview = () => {
+  const [stats, setStats] = useState({ bookings: 0, todayBookings: 0, orders: 0, revenue: 0 });
+  useEffect(() => {
+    (async () => {
+      const { data: appts } = await supabase.from("appointments").select("id, created_at");
+      const { data: orders } = await supabase.from("orders").select("id, total_amount, status");
+      const today = new Date().toDateString();
+      setStats({
+        bookings: appts?.length ?? 0,
+        todayBookings: (appts ?? []).filter((a: any) => new Date(a.created_at).toDateString() === today).length,
+        orders: orders?.length ?? 0,
+        revenue: (orders ?? []).reduce((s: number, o: any) => s + Number(o.total_amount || 0), 0),
+      });
+    })();
+  }, []);
+  const items = [
+    { label: "WhatsApp Bookings", value: stats.bookings },
+    { label: "Bookings Today", value: stats.todayBookings },
+    { label: "Shop Orders", value: stats.orders },
+    { label: "Shop Revenue", value: `₹${stats.revenue.toLocaleString("en-IN")}` },
+  ];
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      {items.map((i) => (
+        <div key={i.label} className="glass-gold rounded-2xl p-4 text-center">
+          <div className="text-2xl font-bold text-gold">{i.value}</div>
+          <div className="text-xs text-cosmic-silver/70 mt-1">{i.label}</div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const OrdersTab = () => {
+  const [list, reload] = useList("orders");
+  return (
+    <div className="space-y-3 mt-6">
+      {list.length === 0 && <div className="text-center text-cosmic-silver/60 py-8">No shop orders yet</div>}
+      {list.map((o) => (
+        <div key={o.id} className="glass-gold rounded-2xl p-4">
+          <div className="flex justify-between">
+            <div>
+              <div className="font-display text-gold">{o.customer_name || o.full_name || "Customer"}</div>
+              <div className="text-xs text-cosmic-silver/70">{o.phone} • {o.email}</div>
+            </div>
+            <div className="text-right">
+              <div className="text-gold font-semibold">₹{Number(o.total_amount || 0).toLocaleString("en-IN")}</div>
+              <div className="text-xs text-cosmic-silver/60">{new Date(o.created_at).toLocaleString()}</div>
+            </div>
+          </div>
+          <select value={o.status || "pending"} onChange={async (e) => { await supabase.from("orders").update({ status: e.target.value }).eq("id", o.id); reload(); }} className="bg-background/60 border border-gold/30 rounded px-2 text-xs mt-2">
+            {["pending", "confirmed", "shipped", "delivered", "cancelled"].map((s) => <option key={s}>{s}</option>)}
+          </select>
+        </div>
+      ))}
+    </div>
   );
 };
 
