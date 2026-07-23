@@ -10,7 +10,6 @@ import NotFound from "./pages/NotFound.tsx";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import Booking from "./pages/Booking";
-import Gallery from "./pages/Gallery";
 import Shop from "./pages/Shop";
 import Testimonials from "./pages/Testimonials";
 import Contact from "./pages/Contact";
@@ -33,7 +32,6 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/booking" element={<Booking />} />
-            <Route path="/gallery" element={<Gallery />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/faq" element={<Testimonials />} />
